@@ -34,11 +34,11 @@
 
 ## Installation
 - Clone this repository
-- Checkout to branch `intern`
-- If Directory `/vendor` included while cloning and make some error, delete `vendor` directory, then
+- Checkout to branch `develop`
 - Run `composer install`
 - Run `php artisan key:generate`
 - Setup database, `you can ask other developer to get local dummy database`
+- You can ask other developer to get file .env
 - Run `php artisan storage:link`
 - Run `php artisan serve`
 
