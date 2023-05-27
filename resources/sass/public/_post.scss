@@ -1,0 +1,18 @@
+.meta-section {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #BDBDBD;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    .date{
+        float: left;
+        padding-left: 5px;
+    }
+
+    .current-view{
+        float: right;
+        padding-right: 5px;
+    }
+}

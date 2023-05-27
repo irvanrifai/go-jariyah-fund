@@ -1,0 +1,45 @@
+// scss-docs-start import-stack
+// Configuration
+@import '~bootstrap-v5/scss/functions';
+@import '~bootstrap-v5/scss/variables';
+@import '~bootstrap-v5/scss/mixins';
+@import '~bootstrap-v5/scss/utilities';
+
+// Layout & components
+@import '~bootstrap-v5/scss/root';
+@import '~bootstrap-v5/scss/reboot';
+@import '~bootstrap-v5/scss/type';
+@import '~bootstrap-v5/scss/images';
+@import '~bootstrap-v5/scss/containers';
+@import '~bootstrap-v5/scss/grid';
+@import '~bootstrap-v5/scss/tables';
+@import '~bootstrap-v5/scss/forms';
+@import '~bootstrap-v5/scss/buttons';
+@import '~bootstrap-v5/scss/transitions';
+@import '~bootstrap-v5/scss/dropdown';
+@import '~bootstrap-v5/scss/button-group';
+@import '~bootstrap-v5/scss/nav';
+@import '~bootstrap-v5/scss/navbar';
+@import '~bootstrap-v5/scss/card';
+@import '~bootstrap-v5/scss/accordion';
+@import '~bootstrap-v5/scss/breadcrumb';
+@import '~bootstrap-v5/scss/pagination';
+@import '~bootstrap-v5/scss/badge';
+@import '~bootstrap-v5/scss/alert';
+@import '~bootstrap-v5/scss/progress';
+@import '~bootstrap-v5/scss/list-group';
+@import '~bootstrap-v5/scss/close';
+@import '~bootstrap-v5/scss/toasts';
+@import '~bootstrap-v5/scss/modal';
+@import '~bootstrap-v5/scss/tooltip';
+@import '~bootstrap-v5/scss/popover';
+@import '~bootstrap-v5/scss/carousel';
+@import '~bootstrap-v5/scss/spinners';
+@import '~bootstrap-v5/scss/offcanvas';
+
+// Helpers
+@import '~bootstrap-v5/scss/helpers';
+
+// Utilities
+@import '~bootstrap-v5/scss/utilities/api';
+// scss-docs-end import-stack

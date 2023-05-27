@@ -1,0 +1,47 @@
+.ps-main-form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    min-height: 600px;
+}
+
+.public-service {
+    input[type=text],
+    textarea {
+        border: 1px solid #D3D6E4;
+        box-sizing: border-box;
+        border-radius: 10px;
+        font-size: 16px;
+        padding: 13px;
+
+        &::placeholder {
+            color: #E0E0E0;
+        }
+    }
+
+    .form-section{
+        .form-item{
+            margin-bottom: 25px;
+
+            .col-form-label{
+                padding-top: 15px;
+            }
+        }
+
+        .form-check{
+            padding-top: 15px;
+        }
+
+        .submit-right{
+            padding-top: 15px;
+            display: block;
+            text-align: right;
+        }
+
+        .submit-left{
+            padding-top: 15px;
+            display: block;
+            text-align: left;
+        }
+    }
+
+}

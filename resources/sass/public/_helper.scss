@@ -1,0 +1,159 @@
+.bg-dot-nusantara {
+    background: url("assets/nusantara-dot.svg");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 65% auto;
+    background-color: $navy-blue;
+}
+
+.bg-dot-nusantara-grey {
+    background: url("assets/nusantara-dot-grey.svg");
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 65% auto;
+    background-color: white;
+}
+
+.bg-dot-yellow{
+    background: url("assets/yellow-dot.svg") no-repeat;
+    background-position: bottom 0px left 40%;
+    background-size: 10% auto;
+    background-color: #fff;
+}
+
+.bg-half-circle{
+    background: url("assets/half-circle.svg") no-repeat right;
+    background-size: 20% auto;
+    background-color: #fff;
+}
+
+.bg-dot-blue{
+    background: url("assets/blue-dot.svg") no-repeat left top;
+}
+
+hr.hr-37 {
+    width: 37px;
+    border: #fff 2px solid;
+    opacity: 1;
+}
+
+.widget {
+    margin-bottom: 18px;
+}
+
+.gold-title {
+    color: $yellow;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    margin-bottom: 15px;
+}
+
+.list-link {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin-bottom: 7px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+}
+
+.list-social-inline {
+    display: inline-flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin-right: 15px;
+
+        a {
+            font-size: 30px;
+        }
+    }
+}
+
+.contact{
+    .kontak{
+        text-decoration: none; 
+        color: #3F4354;
+    }
+
+    .instagram{
+        color: #F00073;
+    }
+
+    .twitter{
+        color: #1DA1F2;
+    }
+
+    .facebook{
+        color: #1877F2;
+    }
+
+    .youtube{
+        color: #FF0000;
+    }
+}
+
+/**
+Letter Spacing
+ */
+
+@for $i from 1 through 5 {
+    .text-ls-#{$i} {
+        letter-spacing: #{$i}px;
+    }
+}
+
+.hl {
+    padding: 5px 15px;
+    border-radius: 50px;
+    color: white;
+
+    &-idle {
+        background: #959492;
+        box-shadow: 2px 2px 15px 2px rgba(130, 130, 130, 0.25);
+        border-radius: 50px;
+    }
+
+    &-yellow {
+        background: #F2C14B;
+        box-shadow: 2px 2px 15px 2px rgba(242, 193, 75, 0.25);
+        border-radius: 50px;
+    }
+
+    &-red {
+        background: #cd0707;
+        box-shadow: 2px 2px 15px 2px rgba(242, 75, 75, 0.25);
+        border-radius: 50px;
+    }
+
+    &-green {
+        background: #0fba04;
+        box-shadow: 2px 2px 15px 2px rgba(133, 242, 75, 0.25);
+        border-radius: 50px;
+    }
+
+    &-outline-purple {
+        background: #EFEAFF;
+        border: 1px solid rgba(135, 96, 245, 0.4);
+        box-sizing: border-box;
+        border-radius: 10px;
+        font-size: 14px;
+        color: rgba(135, 96, 245, 0.4);
+    }
+
+    &-small {
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+}
+

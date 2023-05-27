@@ -1,0 +1,33 @@
+.widget{
+    margin-bottom: 15px;
+    .widget-header{
+        padding: 20px;
+        border-radius: 15px;
+        background-color: #F0F4F7;
+        h3{
+            font-size: 20px;
+            font-weight: 600;
+            color: $blue;
+            margin: 0;
+        }
+        margin-bottom: 15px;
+    }
+
+    .widget-body{
+        padding: 0 20px;
+    }
+
+    &--MenuLinks{
+        .list-unstyled{
+            li{
+                margin-bottom: 10px;
+            }
+
+            a{
+                color: $blue;
+            }
+        }
+    }
+}
+
+

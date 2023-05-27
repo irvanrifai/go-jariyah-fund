@@ -1,0 +1,50 @@
+.main-footer {
+    background-color: $navy-blue;
+    padding-top: 1.7rem;
+    color: #fff;
+    margin-bottom: 0;
+
+    a {
+        color: #fff;
+    }
+
+    .footer-logo {
+        max-height: 40px;
+        width: auto;
+    }
+
+    .footer-contact{
+        p{
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .link-phone{
+            font-size: 24px;
+            text-decoration: none;
+            .ico-phone{
+                font-size: 30px;
+                color: $yellow;
+            }
+
+            .num{
+                position: relative;
+                top: -2px;
+            }
+        }
+    }
+
+    .mf-credits {
+        margin-top: 1.5rem;
+        text-align: center;
+        background-color: $navy-blue-darker;
+        padding: 12px;
+
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            font-weight: 100;
+        }
+    }
+}

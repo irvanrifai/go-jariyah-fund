@@ -1,0 +1,18 @@
+.navbar-kemenkop{
+    background-color: $navy-blue;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    .navbar-logo{
+        max-height: 40px;
+    }
+
+    .nav-link{
+        color: #fff !important;
+        font-weight: 400;
+        font-family: $font-family-sans-serif;
+        font-style: normal;
+        &.active{
+            color: $yellow !important;
+        }
+    }
+}

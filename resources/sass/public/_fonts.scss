@@ -1,0 +1,15 @@
+@import "variables";
+
+.judul-besar{
+  font-weight: $font-weight-bold;
+  color: $navy-blue;
+}
+
+.judul-sedang, .black-one{
+  color: $text-page;
+}
+
+.judul-kecil{
+  font-weight: $font-weight-bold;
+  color: $navy-blue;
+}

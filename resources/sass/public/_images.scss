@@ -1,0 +1,60 @@
+@use 'sass:math';
+.img-video{
+	@include media-breakpoint-down(sm){
+		height: 400px;
+	}
+}
+
+//ABOUT
+.ftco-about{
+	.one-half{
+		width: 100%;
+		padding: 30px 15px;
+		@include media-breakpoint-up(md){
+			padding: 5% 13% 5% 5%;
+			width: 50%;
+		}
+		&.img{
+			display: block;
+			@include media-breakpoint-down(sm){
+				height: 300px;
+			}
+		}
+	}
+}
+
+.img-fluid {
+    @include img-fluid;
+  }
+
+
+  // Image thumbnails
+  .img-thumbnail {
+    padding: $thumbnail-padding;
+    background-color: $thumbnail-bg;
+    border: $thumbnail-border-width solid $thumbnail-border-color;
+    @include border-radius($thumbnail-border-radius);
+    @include box-shadow($thumbnail-box-shadow);
+
+    // Keep them at most 100% wide
+    @include img-fluid;
+  }
+
+  //
+  // Figures
+  //
+
+  .figure {
+    // Ensures the caption's text aligns with the image.
+    display: inline-block;
+  }
+
+  .figure-img {
+    margin-bottom: math.div($spacer, 2);
+    line-height: 1;
+  }
+
+  .figure-caption {
+    font-size: $figure-caption-font-size;
+    color: $figure-caption-color;
+  }
