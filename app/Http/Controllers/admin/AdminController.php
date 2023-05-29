@@ -116,7 +116,7 @@ class AdminController extends Controller
         $bayar_cicil=DB::table('jf_cicilan')->sum('nominal');
         $final=$fin+$bayar_cicil;
 
-        return view('admin.dashboard')->with(compact('totalkelompok','total_all' ,'totalgroup','final','totalajuan', 'tomu','req', 'acc', 'fin'));
+        return view('admin.content.dashboard')->with(compact('totalkelompok','total_all' ,'totalgroup','final','totalajuan', 'tomu','req', 'acc', 'fin'));
     }
 
     public function filterdatatable()
@@ -125,9 +125,9 @@ class AdminController extends Controller
     }
 
     //DUTA
-    public function duta()
+    public function dutaWakafList()
     {
-        return view('admin.duta');
+        return view('admin.content.duta-wakaf-list');
     }
 
     public function addDuta()
@@ -207,9 +207,9 @@ class AdminController extends Controller
     }
 
     //NAZHIR
-    public function nazhir()
+    public function nazhirList()
     {
-        return view('admin/tampilnazhir');
+        return view('admin.content.nazhir-list');
     }
 
     public function detailNazhir($id)
@@ -255,9 +255,9 @@ class AdminController extends Controller
     }
 
     //PROJECT
-    public function projek()
+    public function projectList()
     {
-        return view('admin/tampilprojek');
+        return view('admin.content.project-list');
     }
 
     public function get_projek(Request $request)
@@ -300,7 +300,7 @@ class AdminController extends Controller
     //PENDAMPING
     public function getPendamping()
     {
-        return view('admin/pendamping');
+        return view('admin.content.pendamping-list');
     }
 
     public function dataPendamping(Request $request)
@@ -391,7 +391,7 @@ class AdminController extends Controller
     //SETTING
     public function getSetting()
     {
-        return view('admin/tampilsetting');
+        return view('admin.content.setting-list');
     }
 
     public function dataSetting(Request $request)
@@ -583,7 +583,7 @@ class AdminController extends Controller
     //GROUP
     public function group()
     {
-        return view('admin/tampilangroup');
+        return view('admin.content.group-list');
     }
 
     public function dataGroup(Request $request)
@@ -851,9 +851,9 @@ class AdminController extends Controller
     }
 
     //PENGAJUAN PINJAM
-    public function tampilpengajuanpinjam()
+    public function requestPinjam()
     {
-        return view('admin/pengajuanpinjam');
+        return view('admin.content.approval-admin');
     }
 
     public function pengajuanpinjam(Request $request)
@@ -1037,9 +1037,9 @@ class AdminController extends Controller
     }
 
     //CICILAN
-    public function tampilcicilan()
+    public function requestCicilan()
     {
-        return view('admin/tampilcicilan');
+        return view('admin.content.cicilan');
     }
 
     public function dataCicilan(Request $request)
@@ -1186,13 +1186,13 @@ class AdminController extends Controller
     }
 
     //dana masuk
-    public function tampilandanamasuk()
+    public function fundIncoming()
     {
-        return view('admin/tampilandanamasuk');
+        return view('admin.content.incoming-fund');
     }
 
     //dana terpakai
-    public function tampilandanaterpakai()
+    public function fundUsed()
     {
         return view('template.development-admin');
     }
@@ -1628,6 +1628,6 @@ class AdminController extends Controller
         // }
         // $data->is_show_cicilan = $is_show_cicilan;
 
-        return view('admin/detail-request-pinjam')->with(['data' => $data]);
+        return view('admin.content.detail-request-pinjam')->with(['data' => $data]);
     }
 }

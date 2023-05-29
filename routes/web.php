@@ -31,13 +31,14 @@ Route::group([
     'as'    => 'admin.',
     'middleware' => ['auth:admin']
 ], function () {
-    Route::get('filterdatatable', [Controllers\admin\AdminController::class, 'filterdatatable'])->name('filterdatatable');
+    // Route::get('/', [Controllers\admin\DashboardAdminController::class, 'index'])->name('/');
+
     Route::get('dashboard', [Controllers\admin\AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('filterdatatable', [Controllers\admin\AdminController::class, 'filterdatatable'])->name('filterdatatable');
     Route::get('detail-request-pinjam/{id}', [Controllers\admin\AdminController::class, 'detailRequestPinjam'])->name('detail-request-pinjam');
 
     //DUTA
-    Route::get('tampilandashboard', [Controllers\admin\DashboardAdminController::class, 'index'])->name('tampilandashboard');
-    Route::get('tampilandutawakaf', [Controllers\admin\AdminController::class, 'duta'])->name('tampilandutawakaf');
+    Route::get('/duta-wakaf-list', [Controllers\admin\AdminController::class, 'dutaWakafList'])->name('duta-wakaf-list');
     Route::get('datadutawakaf/dataduta', [Controllers\admin\AdminController::class, 'get_duta_wakaf'])->name('datadutawakaf.dataduta');
     Route::get('totalduta', [Controllers\admin\AdminController::class, 'totalduta'])->name('totalduta');
     // Route::get('add-duta', [Controllers\admin\AdminController::class, 'addDuta'])->name('add-duta');
@@ -72,12 +73,12 @@ Route::group([
 
 
     //PENGAJUAN PINJAM
-    Route::get('tampilpengajuanpinjam', [Controllers\admin\AdminController::class, 'tampilpengajuanpinjam'])->name('tampilpengajuanpinjam');
+    Route::get('/approval-admin/request-pinjam', [Controllers\admin\AdminController::class, 'requestPinjam'])->name('approval-admin.request-pinjam');
     Route::get('/pengajuanpinjam/pengajuanpinjam', [Controllers\admin\AdminController::class, 'pengajuanpinjam'])->name('pengajuanpinjam.pengajuanpinjam');
     Route::get('/lihatlistapproval/{id}', [Controllers\admin\AdminController::class, 'lihatlistaproval'])->name('lihatlistapproval');
 
     //CICILAN
-    Route::get('tampilcicilan', [Controllers\admin\AdminController::class, 'tampilcicilan'])->name('tampilcicilan');
+    Route::get('/approval-admin/request-cicilan', [Controllers\admin\AdminController::class, 'requestCicilan'])->name('approval-admin.request-cicilan');
     Route::get('/data-cicilan', [Controllers\admin\AdminController::class, 'dataCicilan'])->name('data-cicilan');
     Route::get('add-cicilan', [Controllers\admin\AdminController::class, 'addcicil'])->name('add-cicilan');
     Route::post('/tambahcicilan', [Controllers\admin\AdminController::class, 'createCicil'])->name('tambahcicilan');
@@ -93,11 +94,11 @@ Route::group([
     Route::get('check-is-step-six-complete/{id}', [Controllers\TrackingPinjamanAnggotaController::class, 'checkIsStepSixComplete'])->name('check-is-step-six-complete');
 
     //DANA MASUK
-    Route::get('tampilandanamasuk', [Controllers\admin\AdminController::class, 'tampilandanamasuk'])->name('tampilandanamasuk');
+    Route::get('/fund/incoming', [Controllers\admin\AdminController::class, 'fundIncoming'])->name('fund.incoming');
     Route::get('/mudharabah/mudharabah', [Controllers\admin\AdminController::class, 'showmudharabah'])->name('mudharabah.mudharabah');
 
     //DANA TERPAKAI
-    Route::get('tampilandanaterpakai', [Controllers\admin\AdminController::class, 'tampilandanaterpakai'])->name('tampilandanaterpakai');
+    Route::get('/fund/used', [Controllers\admin\AdminController::class, 'fundUsed'])->name('fund-used');
 
     //LIST ANGGOTA
     Route::get('tampilanlistanggota', [Controllers\admin\AdminController::class, 'listAnggota'])->name('tampilanlistanggota');
@@ -121,16 +122,16 @@ Route::group([
     Route::post('remove-anggota-from-group/{id}', [Controllers\admin\AdminController::class, 'removeAnggotaFromGroup'])->name('remove-anggota-from-group');
 
     //NAZHIR
-    Route::get('tampilan-nazhir', [Controllers\admin\AdminController::class, 'nazhir'])->name('tampilan-nazhir');
+    Route::get('/nazhir-list', [Controllers\admin\AdminController::class, 'nazhirList'])->name('nazhir-list');
     Route::get('datanazhir/datanazhir', [Controllers\admin\AdminController::class, 'get_nazhir'])->name('datanazhir.datanazhir');
     // Route::get('add-nazhir', [Controllers\admin\AdminController::class, 'addNazhir'])->name('add-nazhir');
 
     //PROJEK
-    Route::get('tampilan-projek', [Controllers\admin\AdminController::class, 'projek'])->name('tampilan-projek');
+    Route::get('project-list', [Controllers\admin\AdminController::class, 'projectList'])->name('project-list');
     Route::get('dataprojek/dataprojek', [Controllers\admin\AdminController::class, 'get_projek'])->name('dataprojek.dataprojek');
 
     // MENU PENDAMPING
-    Route::get('pendamping', [Controllers\admin\AdminController::class, 'getPendamping'])->name('pendamping');
+    Route::get('/pendamping-list', [Controllers\admin\AdminController::class, 'getPendamping'])->name('pendamping-list');
     Route::get('data-pendamping', [Controllers\admin\AdminController::class, 'dataPendamping'])->name('data-pendamping');
     Route::post('create-update-pendamping', [Controllers\admin\AdminController::class, 'createUpdatePendamping'])->name('create-update-pendamping');
     Route::get('edit-pendamping/{id}', [Controllers\admin\AdminController::class, 'editPendamping'])->name('edit-pendamping');

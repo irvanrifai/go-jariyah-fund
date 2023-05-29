@@ -1,4 +1,6 @@
-@extends('admin.index')
+@extends('admin.layout.main')
+
+@section('title', 'Project')
 
 @section('content_judul')
 <h4 class="m-0 text-dark">Data Project</h4>

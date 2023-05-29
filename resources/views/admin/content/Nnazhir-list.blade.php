@@ -1,4 +1,6 @@
-@extends('admin.index')
+@extends('admin.layout.main')
+
+@section('title', 'Nazhir')
 
 @section('content_judul')
 <h4 class="m-0 text-dark">Tambah Data Duta Wakaf</h4>

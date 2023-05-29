@@ -17,7 +17,7 @@ use App\Models\JfTrackingPinjamanAnggota;
 class PendampingController extends Controller
 {
     public function index(){
-        return view('admin.approval-pendamping');
+        return view('admin.content.approval-pendamping');
     }
 
     public function dataApprove(Request $request)

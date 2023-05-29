@@ -1,8 +1,6 @@
-@extends('admin.index')
+@extends('admin.layout.main')
 
 @section('title', 'Informasi')
-
-@section('plugins.Summernote', true)
 
 @section('body')
 

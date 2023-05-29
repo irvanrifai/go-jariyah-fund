@@ -1,15 +1,12 @@
-@extends('admin.index')
+@extends('admin.layout.main')
+
+@section('title', 'Dashboard')
 
 @section('css-new-dashboard')
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('asset-new-dashboard/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('asset-new-dashboard/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('asset-new-dashboard/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet"> -->
-    <!-- <link href="{{ asset('asset-new-dashboard/vendor/quill/quill.snow.css') }}" rel="stylesheet"> -->
-    <!-- <link href="{{ asset('asset-new-dashboard/vendor/quill/quill.bubble.css') }}" rel="stylesheet"> -->
-    <!-- <link href="{{ asset('asset-new-dashboard/vendor/remixicon/remixicon.css') }}" rel="stylesheet"> -->
-    <!-- <link href="{{ asset('asset-new-dashboard/vendor/simple-datatables/style.css') }}" rel="stylesheet"> -->
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('asset-new-dashboard/css/style.css') }}" rel="stylesheet">

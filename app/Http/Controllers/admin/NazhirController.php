@@ -15,7 +15,7 @@ use App\Models\JfTrackingPinjamanAnggota;
 class NazhirController extends Controller
 {
     public function index(){
-        return view('admin.approval-nazhir');
+        return view('admin.content.approval-nazhir');
     }
 
     public function dataApprove(Request $request)

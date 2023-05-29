@@ -1,6 +1,6 @@
-@extends('admin.index')
+@extends('admin.layout.main')
 
-@section('title', 'Detail Pengajuan Peminjaman')
+@section('title', 'Detail')
 
 @section('content_header_title', 'Detail Pengajuan Peminjaman')
 

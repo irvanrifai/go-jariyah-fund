@@ -1,10 +1,8 @@
-@extends('adminlte::page')
+@extends('admin.layout.main')
 
 @section('title', 'Informasi')
 
-@section('plugins.Summernote', true)
-
-@section('content')
+@section('body')
 
 <div class="text-center pt-4">
     <div class="container">
