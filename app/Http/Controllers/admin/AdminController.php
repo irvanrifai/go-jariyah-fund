@@ -1630,4 +1630,92 @@ class AdminController extends Controller
 
         return view('admin.content.detail-request-pinjam')->with(['data' => $data]);
     }
+
+    public function listDetailApprovalAnggota(Request $request, $id){
+        $data = DB::table('jf_pinjam_approval')
+        ->where('jf_pinjam_approval.pinjam_id', $id)
+        ->join('jf_group_anggota', 'jf_pinjam_approval.group_anggota_id', '=', 'jf_group_anggota.id')
+        ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
+        ->select('pa_duta_wakaf.duta_name as name', 'jf_pinjam_approval.accepted_at', 'jf_pinjam_approval.status', 'jf_pinjam_approval.note')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function listDetailApprovalPendamping(Request $request, $id){
+        $data = DB::table('jf_pinjam_approval_by_pendamping')
+        ->where('jf_pinjam_approval_by_pendamping.pinjam_id', $id)
+        ->join('jf_pendamping', 'jf_pinjam_approval_by_pendamping.pendamping_id', '=', 'jf_pendamping.id')
+        ->select('jf_pendamping.name', 'jf_pinjam_approval_by_pendamping.accepted_at', 'jf_pinjam_approval_by_pendamping.status', 'jf_pinjam_approval_by_pendamping.note')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function listDetailApprovalNazhir(Request $request, $id){
+        $data = DB::table('jf_pinjam_approval_by_nazhir')
+        ->where('jf_pinjam_approval_by_nazhir.pinjam_id', $id)
+        ->join('pa_nazhir', 'jf_pinjam_approval_by_nazhir.nazhir_id', '=', 'pa_nazhir.id')
+        ->select('pa_nazhir.nazhir_name as name', 'jf_pinjam_approval_by_nazhir.accepted_at', 'jf_pinjam_approval_by_nazhir.status', 'jf_pinjam_approval_by_nazhir.note')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function listDetailApprovalAdmin(Request $request, $id){
+        $data = DB::table('jf_pinjam')
+        ->where('jf_pinjam.id', $id)
+        ->where('jf_pinjam.accepted_at', '!=', null)
+        ->select('jf_pinjam.nominal_accepted', 'jf_pinjam.accepted_at', 'jf_pinjam.status')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function dataListCicilan(Request $request, $id){
+        $data = DB::table('jf_cicilan')
+        ->where('jf_cicilan.pinjam_id', $id)
+        ->select(
+            'jf_cicilan.id',
+            'jf_cicilan.nominal',
+            'jf_cicilan.note_internal as desc_cicilan',
+            'jf_cicilan.created_at',
+            'jf_cicilan.is_valid as status',
+            'jf_cicilan.note_admin',
+            'jf_cicilan.approval_at'
+        )
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+
+            return datatables()->of($data)
+                ->addColumn('action', function ($key) {
+                    $actionBtn = "
+                    <a role='button' class='btn-sm btn-info detail-cicilan' title='Detail' data-id='$key->id' style='color:white;'>
+                    <i class='fas fa-eye'></i></a>
+                    </button>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->toJson();
+        }
+    }
 }

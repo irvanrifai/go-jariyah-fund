@@ -436,7 +436,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ URL::to('anggota/list-detail-approval-anggota') }}" + "/" + id,
+            ajax: "{{ URL::to('admin/list-detail-approval-anggota') }}" + "/" + id,
             columns: [{
                     data: 'name',
                     name: 'name'
@@ -475,7 +475,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ URL::to('anggota/list-detail-approval-pendamping') }}" + "/" + id,
+            ajax: "{{ URL::to('admin/list-detail-approval-pendamping') }}" + "/" + id,
             columns: [{
                     data: 'name',
                     name: 'name'
@@ -514,7 +514,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ URL::to('anggota/list-detail-approval-nazhir') }}" + "/" + id,
+            ajax: "{{ URL::to('admin/list-detail-approval-nazhir') }}" + "/" + id,
             columns: [{
                     data: 'name',
                     name: 'name'
@@ -553,7 +553,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ URL::to('anggota/list-detail-approval-admin') }}" + "/" + id,
+            ajax: "{{ URL::to('admin/list-detail-approval-admin') }}" + "/" + id,
             columns: [{
                     "data": null,
                     render: function(data, type, row, meta) {
@@ -598,7 +598,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ URL::to('anggota/data-list-cicilan') }}" + "/" + id,
+            ajax: "{{ URL::to('admin/data-list-cicilan') }}" + "/" + id,
             columns: [
                 {
                     "data": null,
@@ -673,7 +673,7 @@
             $('#detail-cicilan-modal').modal('show');
             $.ajax({
                 type: "get",
-                url: "{{ URL::to('anggota/detail-cicilan') }}" + "/" + id,
+                url: "{{ URL::to('admin/detail-cicilan') }}" + "/" + id,
                 success: function(response) {
 
                     if (response.status != 200) {
@@ -722,7 +722,7 @@
                     processData: false,
                     contentType: false,
                     cache: false,
-                    url: "{{ URL::to('anggota/create-cicilan') }}",
+                    url: "{{ URL::to('admin/create-cicilan') }}",
                     type: "POST",
                     dataType: 'json',
                     enctype: 'multipart/form-data',

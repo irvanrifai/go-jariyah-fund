@@ -175,6 +175,14 @@ Route::group([
     Route::get('/filterajuan/filterajuan', [Controllers\admin\AdminController::class, 'filterajuanajuan'])->name('filterajuan/filterajuan');
 
     Route::get('/get-prov/{duta}', [Controllers\admin\AdminController::class, 'getProvinsi'])->name('get-prov');
+
+    // DETAIL ALL APPROVAL ON PINJAM
+    Route::get('/list-detail-approval-anggota/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalAnggota'])->name('list-detail-approval-anggota');
+    Route::get('/list-detail-approval-pendamping/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalPendamping'])->name('list-detail-approval-pendamping');
+    Route::get('/list-detail-approval-nazhir/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalNazhir'])->name('list-detail-approval-nazhir');
+    Route::get('/list-detail-approval-admin/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalAdmin'])->name('list-detail-approval-admin');
+
+    Route::get('/data-list-cicilan/{id}', [Controllers\admin\AdminController::class, 'dataListCicilan'])->name('data-list-cicilan');
 });
 
 Route::prefix('anggota')->group(function () {
