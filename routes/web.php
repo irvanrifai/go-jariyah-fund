@@ -26,18 +26,6 @@ Route::post('/admin-login', [Controllers\Auth\LoginController::class, 'loginAdmi
 Route::post('/user-logout', [Controllers\Auth\LoginController::class, 'logoutUser'])->name('user-logout');
 Route::post('/admin-logout', [Controllers\Auth\LoginController::class, 'logoutAdmin'])->name('admin-logout');
 
-Route::get('/backoffice', function(){
-    return response("Whooopsss!", 404);
-});
-
-Route::get('/account/password/reset', function(){
-    return response("Whooopsss!", 404);
-});
-
-Route::get('/account/password/email', function(){
-    return response("Whooopsss!", 404);
-});
-
 Route::group([
     'prefix' => 'admin',
     'as'    => 'admin.',
@@ -276,4 +264,17 @@ Route::group([
     //SIMULASI PINJAM
     Route::get('/simulasipinjam', [Controllers\anggota\SimulasiPinjamController::class, 'index'])->name('simulasipinjam');
     Route::get('/peruntukan', [Controllers\PeruntukanController::class, 'index'])->name('peruntukan');
+});
+
+
+Route::get('/backoffice', function(){
+    return response("Whooopsss!", 404);
+});
+
+Route::get('/account/password/reset', function(){
+    return response("Whooopsss!", 404);
+});
+
+Route::get('/account/password/email', function(){
+    return response("Whooopsss!", 404);
 });

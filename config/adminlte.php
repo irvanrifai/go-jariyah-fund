@@ -244,7 +244,7 @@ return [
             'icon' => 'fas fa-hand-holding-usd fa-fw',
             'submenu' => [
                 [
-                    'text' => 'Riwayat Pinjam',
+                    'text' => 'Pinjaman Saya',
                     'url' => 'anggota/pengajuanpinjam',
                 ],
                 [
@@ -365,10 +365,10 @@ return [
         //     'icon' => 'fa fa-question-circle',
         //     'url' => 'anggota/user-guide'
         // ],
-        [
-            'text' => 'Logout',
-            'url' => 'logout',
-        ],
+        // [
+        //     'text' => 'Logout',
+        //     'url' => 'anggota/logout',
+        // ],
     ],
 
 
