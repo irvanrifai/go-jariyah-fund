@@ -447,7 +447,7 @@ const table = $('#myTable2').DataTable({
         });
     },
     aaSorting: [
-        [0, "desc"]
+        [4, "desc"]
     ],
     processing: true,
     serverSide: true,
@@ -514,8 +514,6 @@ const table = $('#myTable2').DataTable({
             render: function(data, type, row, meta) {
                 return 'Mengajukan&nbsp' + ":&nbsp" + moment(row.created_at).format('DD-MM-YYYY');
             },
-            orderable: true,
-            searchable: true
         },
         {
             data: 'action',

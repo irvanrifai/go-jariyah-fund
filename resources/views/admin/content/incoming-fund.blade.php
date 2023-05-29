@@ -39,7 +39,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            aaSorting: [[ 0, "desc" ]],
+            aaSorting: [[ 3, "desc" ]],
            // "sPaginationType": "full_numbers",
             ajax: "{{ route('admin.mudharabah.mudharabah') }}",
             columns: [

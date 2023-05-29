@@ -33,6 +33,8 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('user/plugins/summernote/summernote-bs4.min.css')}}">
 
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
   @yield('css-new-dashboard')
   @yield('css-tracking')
 </head>
@@ -76,6 +78,10 @@
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{asset('user/dist/js/pages/dashboard.js')}}"></script>
+
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     @yield('js_plugins')
     @yield('js_inline')
