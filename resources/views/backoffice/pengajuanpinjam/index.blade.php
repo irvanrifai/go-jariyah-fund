@@ -202,7 +202,7 @@
     }
 </script>
 
-<script>
+{{-- <script>
     const table = $('#daftar-artikel-table').DataTable({
         processing: true,
         serverSide: true,
@@ -235,7 +235,7 @@
             },
         ],
     });
-</script>
+</script> --}}
 
 <script>
     $(document).ready(function() {
