@@ -125,9 +125,9 @@ class DashboardController extends Controller
 
 
         // dummy data for demo, you can comment this code, used for temp
-        $data[0] = ['value' => 120000, 'name' => 'Total Pinjam'];
-        $data[1] = ['value' => 20000, 'name' => 'Dikembalikan'];
-        $data[2] = ['value' => 100000,'name' => 'Sisa Pinjam'];
+        // $data[0] = ['value' => 120000, 'name' => 'Total Pinjam'];
+        // $data[1] = ['value' => 20000, 'name' => 'Dikembalikan'];
+        // $data[2] = ['value' => 100000,'name' => 'Sisa Pinjam'];
         // end of dummy data
 
         return $data;
@@ -174,9 +174,9 @@ class DashboardController extends Controller
         $data[2] = ['value' => $sisa_penghimpunan_user, 'name' => 'Sisa Penghimpunan'];
 
         // dummy data for demo, you can comment this code, used for temp
-        $data[0] = ['value' => 1000000, 'name' => 'Total penghimpunan'];
-        $data[1] = ['value' => 150000, 'name' => 'Total Pinjam'];
-        $data[2] = ['value' => 1000000 - 150000, 'name' => 'Sisa Penghimpunan'];
+        // $data[0] = ['value' => 1000000, 'name' => 'Total penghimpunan'];
+        // $data[1] = ['value' => 150000, 'name' => 'Total Pinjam'];
+        // $data[2] = ['value' => 1000000 - 150000, 'name' => 'Sisa Penghimpunan'];
         // end of dummy data
 
         return $data;
@@ -235,16 +235,16 @@ class DashboardController extends Controller
         ];
 
         // dummy data for demo, you can comment this code, used for temp
-        $data['data_series']= [
-            15000000,
-            80000000,
-            5000000
-        ];
-        $data['data_labels'] = [
-            'Anda | ' . 'Rp. ' . number_format(15000000),
-            'Anggota lain | ' . 'Rp. ' . number_format(80000000),
-            'Project | ' . 'Rp. ' . number_format(5000000)
-        ];
+        // $data['data_series']= [
+        //     15000000,
+        //     80000000,
+        //     5000000
+        // ];
+        // $data['data_labels'] = [
+        //     'Anda | ' . 'Rp. ' . number_format(15000000),
+        //     'Anggota lain | ' . 'Rp. ' . number_format(80000000),
+        //     'Project | ' . 'Rp. ' . number_format(5000000)
+        // ];
         // end of dummy data
 
         return $data;
@@ -296,14 +296,14 @@ class DashboardController extends Controller
         ];
 
         // dummy data for demo, you can comment this code, used for temp
-        $data['data_series'] = [
-            8000000,
-            75000000
-        ];
-        $data['data_labels'] = [
-            'Anda | ' . 'Rp. ' . number_format(8000000),
-            'Anggota lain | ' . 'Rp. ' . number_format(75000000)
-        ];
+        // $data['data_series'] = [
+        //     8000000,
+        //     75000000
+        // ];
+        // $data['data_labels'] = [
+        //     'Anda | ' . 'Rp. ' . number_format(8000000),
+        //     'Anggota lain | ' . 'Rp. ' . number_format(75000000)
+        // ];
         // end of dummy data
 
         return $data;
@@ -379,16 +379,16 @@ class DashboardController extends Controller
         ];
 
         // dummy data for demo, you can comment this code, used for temp
-        $data['data_labels'] = [
-            'Total Pinjam',
-            'Dikembalikan',
-            'Sisa Pinjam'
-        ];
-        $data['datas'] = [
-            2300000,
-            50000,
-            2300000 - 50000
-        ];
+        // $data['data_labels'] = [
+        //     'Total Pinjam',
+        //     'Dikembalikan',
+        //     'Sisa Pinjam'
+        // ];
+        // $data['datas'] = [
+        //     2300000,
+        //     50000,
+        //     2300000 - 50000
+        // ];
         // end of dummy data
 
         return $data;
@@ -464,16 +464,16 @@ class DashboardController extends Controller
         ];
 
         // dummy data for demo, you can comment this code, used for temp
-        $data['data_labels'] = [
-            'Total Pinjam',
-            'Dikembalikan',
-            'Sisa Pinjam'
-        ];
-        $data['datas'] = [
-            3000000,
-            550000,
-            3000000 - 550000
-        ];
+        // $data['data_labels'] = [
+        //     'Total Pinjam',
+        //     'Dikembalikan',
+        //     'Sisa Pinjam'
+        // ];
+        // $data['datas'] = [
+        //     3000000,
+        //     550000,
+        //     3000000 - 550000
+        // ];
         // end of dummy data
 
         return $data;

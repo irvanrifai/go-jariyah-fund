@@ -1,8 +1,8 @@
-@extends('admin.layout.main')
+@extends('adminlte::page')
 
 @section('title', 'Informasi')
 
-@section('body')
+@section('content')
 
 <div class="text-center pt-4">
     <div class="container">
