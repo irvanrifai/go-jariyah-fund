@@ -95,7 +95,7 @@ Route::group([
 
     //DANA MASUK
     Route::get('/fund/incoming', [Controllers\admin\AdminController::class, 'fundIncoming'])->name('fund.incoming');
-    Route::get('/mudharabah/mudharabah', [Controllers\admin\AdminController::class, 'showmudharabah'])->name('mudharabah.mudharabah');
+    Route::get('/data-dana-masuk', [Controllers\admin\AdminController::class, 'dataDanaMasuk'])->name('data-dana-masuk');
 
     //DANA TERPAKAI
     Route::get('/fund/used', [Controllers\admin\AdminController::class, 'fundUsed'])->name('fund-used');

@@ -5,7 +5,7 @@
 @section('body')
 <div class="content">
     <div class="row">
-    <h4 class="p-4"> Dana Masuk </h4>
+    <h4 class="p-2"> Dana Masuk </h4>
         <div class="col-md-12">
             <div class="card demo-icons">
               <div class="card-header">
@@ -17,7 +17,7 @@
                                 <th>Alasan Pinjam</th>
                                 <th>Dana Mudharabah</th>
                                 <th>Tanggal Dana Masuk</th>
-                                <th>Action</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                     </table>
@@ -41,7 +41,7 @@
             responsive: true,
             aaSorting: [[ 3, "desc" ]],
            // "sPaginationType": "full_numbers",
-            ajax: "{{ route('admin.mudharabah.mudharabah') }}",
+            ajax: "{{ route('admin.data-dana-masuk') }}",
             columns: [
                 {
                     data:'duta_name',
@@ -62,13 +62,13 @@
                        return moment(row.created_at).format('lll');
                     },
                 },
-                {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                autowidth: false
-                },
+                // {
+                // data: 'action',
+                // name: 'action',
+                // orderable: false,
+                // searchable: false,
+                // autowidth: false
+                // },
             ],
     });
     </script>

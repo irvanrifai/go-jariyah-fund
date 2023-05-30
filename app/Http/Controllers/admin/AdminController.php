@@ -1342,7 +1342,7 @@ class AdminController extends Controller
         return view('admin/lihatlistaproval')->with(['aprove' => $aprove, 'id' => $id]);
     }
 
-    public function showmudharabah(Request $request)
+    public function dataDanaMasuk(Request $request)
     {
         $data = DB::table('jf_pinjam')->select(
             'pa_duta_wakaf.duta_name',
@@ -1358,18 +1358,18 @@ class AdminController extends Controller
 
         if ($request->ajax()) {
             return datatables()->of($data)
-                ->addColumn('action', function ($key) {
-                    $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detailcicilan/" . $key->id . "'>
-                    <i class='fas fa-eye'></i></a>
-                    <a role='button' class='btn-sm btn-warning edit' data-id='$key->id' style='color:white;' title='Edit'>
-                    <i class='fas fa-pen-fancy'></i></a>
-                    <a role='button' class='btn-sm btn-danger hapus' data-id='$key->id' style='color:white;' title='Hapus'>
-                    <i class='fas fa-trash'></i></a>
-                ";
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
+                // ->addColumn('action', function ($key) {
+                //     $actionBtn = "
+                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detailcicilan/" . $key->id . "'>
+                //     <i class='fas fa-eye'></i></a>
+                //     <a role='button' class='btn-sm btn-warning edit' data-id='$key->id' style='color:white;' title='Edit'>
+                //     <i class='fas fa-pen-fancy'></i></a>
+                //     <a role='button' class='btn-sm btn-danger hapus' data-id='$key->id' style='color:white;' title='Hapus'>
+                //     <i class='fas fa-trash'></i></a>
+                // ";
+                //     return $actionBtn;
+                // })
+                // ->rawColumns(['action'])
                 ->toJson();
         }
     }
