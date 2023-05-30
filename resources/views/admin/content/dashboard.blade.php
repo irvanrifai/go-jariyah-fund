@@ -134,7 +134,7 @@
                             <i class="bi bi-cash"></i>
                           </div>
                           <div class="ps-3">
-                            <h6><small>Rp. {{ number_format($acc) }}</small></h6>
+                            <h4 class="text-lg" style="color: midnightblue"><small>Rp. {{ number_format($acc, 2, ',', '.') }}</small></h4>
                             <span class="text-success small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                           </div>
@@ -156,7 +156,7 @@
                             <i class="bi bi-cash"></i>
                           </div>
                           <div class="ps-3">
-                            <h6><small>Rp. {{ number_format($fin) }}</small></h6>
+                            <h4 class="text-lg" style="color: midnightblue"><small>Rp. {{ number_format($fin, 2, ',', '.') }}</small></h4>
                             <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                           </div>
@@ -178,7 +178,7 @@
                                 <i class="bi bi-cash-coin"></i>
                             </div>
                             <div class="ps-3">
-                                <h6><small>Rp. {{ number_format($tomu) }}</small></h6>
+                                <h4 class="text-lg" style="color: midnightblue"><small>Rp. {{ number_format($tomu, 2, ',', '.') }}</small></h4>
                                 <span class="text-success small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">increase</span>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                             <i class="bi bi-cash-stack"></i>
                           </div>
                           <div class="ps-3">
-                            <h6><small>Rp. {{ number_format($final) }}</small></h6>
+                            <h4 class="text-lg" style="color: midnightblue"><small>Rp. {{ number_format($final, 2, ',', '.') }}</small></h4>
                             <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                           </div>
@@ -228,7 +228,7 @@
                             <i class="bi bi-currency-dollar"></i>
                           </div>
                           <div class="ps-3">
-                            <h6><small>Rp. {{ number_format($total_all) }}</small></h6>
+                            <h4 class="text-lg" style="color: midnightblue"><small>Rp. {{ number_format($total_all, 2, ',', '.') }}</small></h4>
                             <span class="text-success small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                           </div>
