@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\anggota;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class SimulasiPinjamController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->RiwayatPeminjaman = new RiwayatPeminjamanController();
     }
 
     public function index()

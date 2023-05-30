@@ -15,7 +15,7 @@ use App\Http\Controllers;
 */
 
 // routing for start session user or admin
-Route::get('/', [Controllers\DashboardController::class, 'loginUser'])->middleware('guest')->name('/');
+Route::get('/', [Controllers\anggota\DashboardController::class, 'loginUser'])->middleware('guest')->name('/');
 Route::get('/admin', [Controllers\admin\AdminController::class, 'index'])->middleware('guest')->name('admin');
 
 // attempt login
@@ -174,19 +174,18 @@ Route::group([
     'middleware' => ['auth:user']
 ], function () {
     // for login
-    Route::get('/', [Controllers\DashboardController::class, 'loginUser']);
+    Route::get('/', [Controllers\anggota\DashboardController::class, 'loginUser']);
 
     // route for auth/no-auth anggota only
-    Route::get('/dashboard', [Controllers\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/statistik', [Controllers\StatistikController::class, 'index'])->name('statistik');
+    Route::get('/dashboard', [Controllers\anggota\DashboardController::class, 'index'])->name('dashboard');
 
     // DATA CHART
-    Route::get('chart-pinjaman-aktif-anda', [Controllers\DashboardController::class, 'chartPinjamanAktifAnda'])->name('chart-pinjaman-aktif-anda');
-    Route::get('chart-akumulasi-anda', [Controllers\DashboardController::class, 'chartAkumulasiAnda'])->name('chart-akumulasi-anda');
-    Route::get('chart-pengumpulan-dana-wakaf-all', [Controllers\DashboardController::class, 'chartPengumpulanDanaWakafAll'])->name('chart-pengumpulan-dana-wakaf-all');
-    Route::get('chart-peminjaman-dana-wakaf-all', [Controllers\DashboardController::class, 'chartPeminjamanDanaWakafAll'])->name('chart-peminjaman-dana-wakaf-all');
-    Route::get('chart-pinjaman-aktif-all', [Controllers\DashboardController::class, 'chartPinjamanAktifAll'])->name('chart-pinjaman-aktif-all');
-    Route::get('chart-akumulasi-all', [Controllers\DashboardController::class, 'chartAkumulasiAll'])->name('chart-akumulasi-all');
+    Route::get('chart-pinjaman-aktif-anda', [Controllers\anggota\DashboardController::class, 'chartPinjamanAktifAnda'])->name('chart-pinjaman-aktif-anda');
+    Route::get('chart-akumulasi-anda', [Controllers\anggota\DashboardController::class, 'chartAkumulasiAnda'])->name('chart-akumulasi-anda');
+    Route::get('chart-pengumpulan-dana-wakaf-all', [Controllers\anggota\DashboardController::class, 'chartPengumpulanDanaWakafAll'])->name('chart-pengumpulan-dana-wakaf-all');
+    Route::get('chart-peminjaman-dana-wakaf-all', [Controllers\anggota\DashboardController::class, 'chartPeminjamanDanaWakafAll'])->name('chart-peminjaman-dana-wakaf-all');
+    Route::get('chart-pinjaman-aktif-all', [Controllers\anggota\DashboardController::class, 'chartPinjamanAktifAll'])->name('chart-pinjaman-aktif-all');
+    Route::get('chart-akumulasi-all', [Controllers\anggota\DashboardController::class, 'chartAkumulasiAll'])->name('chart-akumulasi-all');
 
     //ANGGOTA LAIN
     Route::get('/ajuananggotalain', [Controllers\anggota\PengajuanPinjamController::class, 'lain'])->name('ajuananggotalain');
@@ -249,9 +248,10 @@ Route::group([
     Route::get('check-is-step-five-complete/{id}', [Controllers\TrackingPinjamanAnggotaController::class, 'checkIsStepFiveComplete'])->name('check-is-step-five-complete');
     Route::get('check-is-step-six-complete/{id}', [Controllers\TrackingPinjamanAnggotaController::class, 'checkIsStepSixComplete'])->name('check-is-step-six-complete');
 
-    //SIMULASI PINJAM
+    // UNDER DEVELOPMENT
     Route::get('/simulasipinjam', [Controllers\anggota\SimulasiPinjamController::class, 'index'])->name('simulasipinjam');
-    Route::get('/peruntukan', [Controllers\PeruntukanController::class, 'index'])->name('peruntukan');
+    Route::get('/statistik', [Controllers\anggota\StatistikController::class, 'index'])->name('statistik');
+    Route::get('/peruntukan', [Controllers\anggota\PeruntukanController::class, 'index'])->name('peruntukan');
 });
 
 

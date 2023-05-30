@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\anggota;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Saran;
 use App\Models\jf_pinjam;

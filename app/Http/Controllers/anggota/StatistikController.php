@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\anggota;
 
+use App\Http\Controllers\Controller;
 use App\Models\StatistikModel;
 use Illuminate\Http\Request;
 
