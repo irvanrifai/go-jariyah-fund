@@ -6,7 +6,7 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-            <h4 style="margin-left:13px;">Data Duta Wakaf</h4>
+            <h4 class="p-2">Data Duta Wakaf</h4>
             <div class="card demo-icons" style="margin-top:20px;">
                 <div class="card-header">
                     {{-- <a href="{{ url('admin/add-duta') }}" class="btn btn-primary" style="margin-bottom:10px;" role="button"><i class="nav-icon fas fa-plus"></i>&nbsp;Tambah Data</a> --}}
@@ -19,7 +19,7 @@
                                     <th>Jenis Kelamin</th>
                                     <th>No.HP</th>
                                     <th>E-Mail</th>
-                                    <th>Status</th>
+                                    <th>Status Approval</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -90,7 +90,7 @@
                     serverSide: true,
                     responsive: true,
                     // "sPaginationType": "full_numbers",
-                    ajax: "{{ route('admin.datadutawakaf.dataduta') }}",
+                    ajax: "{{ route('admin.data-dutawakaf') }}",
                     columns: [
                         //{data:'group_anggota_id', name : 'group_anggota_id'},
                         {
@@ -106,8 +106,17 @@
                             searchable: true,
                         },
                         {
-                            data: 'duta_gender',
-                            name: 'duta_gender',
+                            // data: 'duta_gender',
+                            // name: 'duta_gender',
+                            render: function(data, type, row) {
+                                if (row.duta_gender == 'L') {
+                                    return 'Laki-laki';
+                                } else if (row.duta_gender == 'P') {
+                                    return 'Perempuan';
+                                } else {
+                                    return '-'
+                                }
+                            },
                             orderable: true,
                             searchable: false,
                         },
@@ -125,10 +134,10 @@
                         },
                         { //data:'is_approved', name:'is_approved'
                             render: function(data, type, row) {
-                                if (row.is_approved == 0) {
-                                    return '<span class="badge badge-success badge-pill">True</span>';
-                                } else if (row.is_approved == 1) {
-                                    return '<span class="badge badge-danger badge-pill">False</span>';
+                                if (row.is_approved == 1) {
+                                    return '<span class="badge badge-success badge-pill">Approved</span>';
+                                } else if (row.is_approved == 0) {
+                                    return '<span class="badge badge-secondary badge-pill">Iddle</span>';
                                 }
                             },
                             orderable: true,

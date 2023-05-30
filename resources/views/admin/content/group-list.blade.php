@@ -11,7 +11,7 @@
                     <div class="card-header">
                         <a href="javascript:void(0)" id="add-group-btn" class="btn btn-primary active pb-2"
                             role="button"> <i class="nav-icon fas fa-plus"></i>&nbsp;Tambah Data</a>
-                        <div class="table-responsive">
+                        <div class="table-responsive pt-3">
                             <table id="myTable" class="table table-hover table-striped table-bordered" style="width:100%">
                                 <thead class="thead-light">
                                     <tr>

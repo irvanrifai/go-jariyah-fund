@@ -147,28 +147,15 @@ class AdminController extends Controller
         return view('admin.detailduta')->with(['duta' => $duta, 'id' => $id]);
     }
 
-    public function get_duta_wakaf(Request $request)
+    public function getDutaWakaf(Request $request)
     {
         $data  = duta_wakaf::get();
         if ($request->ajax()) {
             //dd($data);
             return datatables()->of($data)
-                ->addColumn('duta_wakaf', function () {
-                    $duta_wakaf = DB::table('pa_duta_wakaf')->get();
-                    return $duta_wakaf;
-                })
                 ->addColumn('action', function ($key) {
-                //     $actionBtn = "
-                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-duta/" . $key->id . "'>
-                //     <i class='fas fa-eye'></i></a>
-                //     <a role='button' class='btn-sm btn-warning' style='color:white;' title='Edit' href='/admin/edit-duta/" . $key->id . "'>
-                //     <i class='fas fa-pen-fancy'></i></a>
-                //     <a role='button' class='btn-sm btn-danger' style='color:white;' title='Hapus' href='/admin/hapusajuanpinjam/" . $key->id . "'>
-                //     <i class='fas fa-trash'></i></a>
-                // </button>";
-
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-duta/" . $key->id . "'>
+                    <a role='button' class='btn-sm btn-info detail-dutawakaf' style='color:white;' title='Detail' data-id='$key->id'>
                     <i class='fas fa-eye'></i></a>
                     ";
                     return $actionBtn;
@@ -219,27 +206,15 @@ class AdminController extends Controller
         return view('admin.detailnazhir')->with(['nazhir' => $nazhir, 'id' => $id]);
     }
 
-    public function get_nazhir(Request $request)
+    public function getNazhir(Request $request)
     {
         $data  = NazhirModel::get();
         if ($request->ajax()) {
             //dd($data);
             return datatables()->of($data)
-                ->addColumn('nazhir', function () {
-                    $nazhir = DB::table('pa_nazhir')->get();
-                    return $nazhir;
-                })
                 ->addColumn('action', function ($key) {
-                //     $actionBtn = "
-                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-nazhir/" . $key->id . "'>
-                //     <i class='fas fa-eye'></i></a>
-                //     <a role='button' class='btn-sm btn-warning' style='color:white;' title='Edit' href='/admin/edit-duta/" . $key->id . "'>
-                //     <i class='fas fa-pen-fancy'></i></a>
-                //     <a role='button' class='btn-sm btn-danger' style='color:white;' title='Hapus' href='/admin/hapusajuanpinjam/" . $key->id . "'>
-                //     <i class='fas fa-trash'></i></a>
-                //   ";
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-nazhir/" . $key->id . "'>
+                    <a role='button' class='btn-sm btn-info detail-nazhir' style='color:white;' title='Detail' data-id='$key->id'>
                     <i class='fas fa-eye'></i></a>
                   ";
                     return $actionBtn;
@@ -260,27 +235,15 @@ class AdminController extends Controller
         return view('admin.content.project-list');
     }
 
-    public function get_projek(Request $request)
+    public function getProject(Request $request)
     {
         $data  = ProjectModel::get();
         if ($request->ajax()) {
             //dd($data);
             return datatables()->of($data)
-                ->addColumn('projek', function () {
-                    $projek = DB::table('pa_project')->get();
-                    return $projek;
-                })
                 ->addColumn('action', function ($key) {
-                //     $actionBtn = "
-                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-project/" . $key->id . "'>
-                //     <i class='fas fa-eye'></i></a>
-                //     <a role='button' class='btn-sm btn-warning' style='color:white;' title='Edit' href='/admin/edit-duta/" . $key->id . "'>
-                //     <i class='fas fa-pen-fancy'></i></a>
-                //     <a role='button' class='btn-sm btn-danger' style='color:white;' title='Hapus' href='/admin/hapusajuanpinjam/" . $key->id . "'>
-                //     <i class='fas fa-trash'></i></a>
-                // ";
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-project/" . $key->id . "'>
+                    <a role='button' class='btn-sm btn-info detail-project' style='color:white;' title='Detail' data-id='$key->id'>
                     <i class='fas fa-eye'></i></a>
                 ";
                     return $actionBtn;
@@ -698,7 +661,7 @@ class AdminController extends Controller
 
         $amount_anggota_in_group = count(DB::table('jf_group_anggota')->where('group_id', $id)->get());
 
-        return view('admin.detailGroup')->with(['group' => $group, 'amount_anggota' => $amount_anggota_in_group]);
+        return view('admin.content.group-detail')->with(['group' => $group, 'amount_anggota' => $amount_anggota_in_group]);
     }
 
     public function addAnggotaToGroup(Request $request)

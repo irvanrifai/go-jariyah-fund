@@ -39,7 +39,7 @@ Route::group([
 
     //DUTA
     Route::get('/duta-wakaf-list', [Controllers\admin\AdminController::class, 'dutaWakafList'])->name('duta-wakaf-list');
-    Route::get('datadutawakaf/dataduta', [Controllers\admin\AdminController::class, 'get_duta_wakaf'])->name('datadutawakaf.dataduta');
+    Route::get('/data-dutawakaf', [Controllers\admin\AdminController::class, 'getDutaWakaf'])->name('data-dutawakaf');
     Route::get('totalduta', [Controllers\admin\AdminController::class, 'totalduta'])->name('totalduta');
     // Route::get('add-duta', [Controllers\admin\AdminController::class, 'addDuta'])->name('add-duta');
     // Route::get('edit-duta/{id}', [Controllers\admin\AdminController::class, 'editDuta'])->name('edit-duta');
@@ -123,12 +123,12 @@ Route::group([
 
     //NAZHIR
     Route::get('/nazhir-list', [Controllers\admin\AdminController::class, 'nazhirList'])->name('nazhir-list');
-    Route::get('datanazhir/datanazhir', [Controllers\admin\AdminController::class, 'get_nazhir'])->name('datanazhir.datanazhir');
+    Route::get('data-nazhir', [Controllers\admin\AdminController::class, 'getNazhir'])->name('data-nazhir');
     // Route::get('add-nazhir', [Controllers\admin\AdminController::class, 'addNazhir'])->name('add-nazhir');
 
     //PROJEK
     Route::get('project-list', [Controllers\admin\AdminController::class, 'projectList'])->name('project-list');
-    Route::get('dataprojek/dataprojek', [Controllers\admin\AdminController::class, 'get_projek'])->name('dataprojek.dataprojek');
+    Route::get('data-project', [Controllers\admin\AdminController::class, 'getProject'])->name('data-project');
 
     // MENU PENDAMPING
     Route::get('/pendamping-list', [Controllers\admin\AdminController::class, 'getPendamping'])->name('pendamping-list');

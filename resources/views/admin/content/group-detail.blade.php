@@ -1,4 +1,6 @@
-@extends('admin.index')
+@extends('admin.layout.main')
+
+@section('title', 'Group Detail')
 
 @section('body')
 <div class="content">

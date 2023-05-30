@@ -10,7 +10,7 @@
 <div class="content">
         <div class="row">
         <div class="col-md-12">
-        <h4 class="p-4">Data Project</h4>
+        <h4 class="p-2">Data Project</h4>
             <div class="card demo-icons">
               <div class="card-header">
                     {{-- <a href="{{ url('admin/add-nazhir') }}" class="btn btn-primary active"  style="margin-bottom:10px;" role="button"><i class="nav-icon fas fa-plus"></i>&nbsp;Tambah Data</a> --}}
@@ -21,7 +21,6 @@
                                     <th>Nama Project</th>
                                     <th>Project Target Abadi</th>
                                     <th>Project Target Kolektif</th>
-
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -52,7 +51,7 @@
             serverSide: true,
             responsive: true,
             //"sPaginationType": "full_numbers",
-            ajax: "{{ route('admin.dataprojek.dataprojek') }}",
+            ajax: "{{ route('admin.data-project') }}",
             columns: [
                 {data:'project_name',name: 'project_name'},
                // {data:'project_slug', name:'project_slug'},

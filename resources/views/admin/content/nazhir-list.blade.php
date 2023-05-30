@@ -6,7 +6,7 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-        <h4 style="margin-left:13px;">Data Nazhir</h4>
+        <h4 class="p-2">Data Nazhir</h4>
           <div class="card demo-icons" style="margin-top:20px;">
             <div class="card-header">
                     {{-- <a href="{{ url('admin/add-nazhir') }}" class="btn btn-primary active" style="margin-bottom:10px;" role="button"><i class="nav-icon fas fa-plus"></i>&nbsp;Tambah Data</a> --}}
@@ -47,7 +47,7 @@
             serverSide: true,
             responsive: true,
             //"sPaginationType": "full_numbers",
-            ajax: "{{ route('admin.datanazhir.datanazhir') }}",
+            ajax: "{{ route('admin.data-nazhir') }}",
             columns: [
                 //{data:'group_anggota_id', name : 'group_anggota_id'},
                 {data:'nazhir_name',name: 'nazhir_name'},
