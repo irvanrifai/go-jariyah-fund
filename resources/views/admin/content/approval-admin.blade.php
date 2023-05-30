@@ -158,15 +158,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
 
-    @section('js_plugins')
-    <!-- DataTables -->
-    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-sorting/datetime-moment.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.js') }}"></script>
-    @endsection
-
     <script>
         const table = $('#myTable2').DataTable({
             initComplete: function() {

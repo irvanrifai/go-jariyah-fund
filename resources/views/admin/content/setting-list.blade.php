@@ -10,7 +10,7 @@
                 <div class="card demo-icons">
                     <div class="card-header">
                         <a href="javascript:void(0)" class="btn btn-primary active add-setting" role="button"><i class="nav-icon fas fa-plus"></i>&nbsp;Tambah Data</a>
-                        <div class="table-responsive">
+                        <div class="table-responsive pt-3">
                             <table id="myTable" class="table table-hover table-striped table-bordered">
                                 <thead class="thead-light">
                                     <tr>

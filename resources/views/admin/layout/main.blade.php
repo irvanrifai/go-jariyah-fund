@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="{{ asset('user/plugins/summernote/summernote-bs4.min.css')}}">
 
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>
 
   @yield('css-new-dashboard')
   @yield('css-tracking')
@@ -82,6 +84,8 @@
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
 
     @yield('js_plugins')
     @yield('js_inline')
