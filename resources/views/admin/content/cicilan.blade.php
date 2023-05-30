@@ -234,27 +234,6 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.data').load("{{ URL::to('admin/filterdatatable') }}"); //ini
-            $("#search").click(function() {
-                var peminjam = $("#peminjam").val();
-                var nominal = $("#nominal").val();
-                $.ajax({
-                    type: 'GET',
-                    url: "{{ URL::to('admin/filterdatatable') }}", //ini
-                    data: {
-                        peminjam: peminjam,
-                        nominal: nominal
-                    },
-                    success: function(hasil) {
-                        $('.data').html(hasil);
-                    }
-                });
-            });
-        });
-    </script>
-
     <script>
         $(document).on('click', '.hapus', function() {
             let id = $(this).attr('data-id')
@@ -390,85 +369,6 @@
                     }
                 }
             });
-        });
-    </script>
-
-    <script>
-        function fetch_std() {
-            $.ajax({
-                url: "{{ URL::to('admin/filter-std') }}",
-                type: "get",
-                //dataType: "json",
-                success: function(data) {
-                    //console.log(data);
-                    data.data.forEach((data) => {
-                        let sentence = ` ${data.duta_name}`;
-                        //console.log(sentence);
-                        stdBody = `<option value="${data.duta_name}">${data.duta_name}</option>`;
-                    });
-                    $('#select_std').append(stdBody);
-                }
-            })
-        };
-        fetch_std();
-
-        function fetch_res() {
-            $.ajax({
-                url: "{{ URL::to('admin/filter-result') }}",
-                type: "get",
-                //dataType: "json",
-                success: function(data) {
-                    //console.log(data);
-                    var resBody = '';
-                    data.data.forEach((data) => {
-                        let sentence = ` ${data.nominal}`;
-                        //console.log(sentence);
-                        resBody += `<option value="${data.nominal}">${data.nominal}</option>`;
-                    });
-                    $('#select_res').append(resBody);
-                }
-            });
-        }
-        fetch_res();
-
-        function fetch(res, std) {
-            $.ajax({
-                url: "{{ URL::to('admin/fetch/fetch') }}",
-                type: "get",
-                //dataType: "json",
-                data: {
-                    std: std,
-                    res: res
-                },
-                success: function(data) {
-                    //console.log(data);
-                }
-            });
-        }
-        fetch()
-
-        $(document).on("click", "#", function(e) {
-            e.preventDefault();
-            var std = $("#select_std").val();
-            //console.log(std);
-            var res = $("#select_res").val();
-            //console.log(res);
-
-            if (std != "" && res != "") {
-                console.log(std);
-                console.log(res);
-                $('#myTable1').DataTable().destroy();
-                fetch(std, res);
-            } else if (std != "" && res == "") {
-                $('#myTable1').DataTable().destroy();
-                fetch(std, "");
-            } else if (std == "" && res != "") {
-                $('#myTable1').DataTable().destroy();
-                fetch('', res);
-            } else {
-                $('#myTable1').DataTable().destroy();
-                fetch();
-            }
         });
     </script>
 

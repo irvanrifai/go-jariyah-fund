@@ -31,19 +31,13 @@ Route::group([
     'as'    => 'admin.',
     'middleware' => ['auth:admin']
 ], function () {
-    // Route::get('/', [Controllers\admin\DashboardAdminController::class, 'index'])->name('/');
-
     Route::get('dashboard', [Controllers\admin\AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('filterdatatable', [Controllers\admin\AdminController::class, 'filterdatatable'])->name('filterdatatable');
     Route::get('detail-request-pinjam/{id}', [Controllers\admin\AdminController::class, 'detailRequestPinjam'])->name('detail-request-pinjam');
 
     //DUTA
     Route::get('/duta-wakaf-list', [Controllers\admin\AdminController::class, 'dutaWakafList'])->name('duta-wakaf-list');
     Route::get('/data-dutawakaf', [Controllers\admin\AdminController::class, 'getDutaWakaf'])->name('data-dutawakaf');
     Route::get('totalduta', [Controllers\admin\AdminController::class, 'totalduta'])->name('totalduta');
-    // Route::get('add-duta', [Controllers\admin\AdminController::class, 'addDuta'])->name('add-duta');
-    // Route::get('edit-duta/{id}', [Controllers\admin\AdminController::class, 'editDuta'])->name('edit-duta');
-    // Route::post('tambah-duta', [Controllers\admin\AdminController::class, 'store'])->name('tambah-duta');
     Route::get('select2-duta', [Controllers\admin\AdminController::class, 'select2dutaname'])->name('select2-duta');
     Route::get('select2-village', [Controllers\admin\AdminController::class, 'select2village'])->name('select2-village');
     Route::get('select2-kec', [Controllers\admin\AdminController::class, 'select2kec'])->name('select2-kec');
@@ -80,8 +74,6 @@ Route::group([
     //CICILAN
     Route::get('/approval-admin/request-cicilan', [Controllers\admin\AdminController::class, 'requestCicilan'])->name('approval-admin.request-cicilan');
     Route::get('/data-cicilan', [Controllers\admin\AdminController::class, 'dataCicilan'])->name('data-cicilan');
-    Route::get('add-cicilan', [Controllers\admin\AdminController::class, 'addcicil'])->name('add-cicilan');
-    Route::post('/tambahcicilan', [Controllers\admin\AdminController::class, 'createCicil'])->name('tambahcicilan');
     Route::get('/detail-cicilan/{id}', [Controllers\admin\AdminController::class, 'detailCicilan'])->name('detail-cicilan');
 
     // TRACKING
@@ -104,27 +96,25 @@ Route::group([
     Route::get('tampilanlistanggota', [Controllers\admin\AdminController::class, 'listAnggota'])->name('tampilanlistanggota');
     Route::get('data-list-anggota', [Controllers\admin\AdminController::class, 'dataListAnggota'])->name('data-list-anggota');
     Route::get('add-list-anggota', [Controllers\admin\AdminController::class, 'addListAnggota'])->name('add-list-anggota');
-    // Route::get('add-anggota-to-group', [Controllers\admin\AdminController::class, 'addAnggotaToGroup'])->name('add-anggota-to-group');
 
     //GROUP
-    Route::get('group', [Controllers\admin\AdminController::class, 'group'])->name('group');
-    Route::get('data-group', [Controllers\admin\AdminController::class, 'dataGroup'])->name('data-group');
-    Route::get('add-group', [Controllers\admin\AdminController::class, 'addGroup'])->name('add-group');
-    Route::post('create-group', [Controllers\admin\AdminController::class, 'createGroup'])->name('create-group');
+    Route::get('/group', [Controllers\admin\AdminController::class, 'group'])->name('group');
+    Route::get('/data-group', [Controllers\admin\AdminController::class, 'dataGroup'])->name('data-group');
+    Route::get('/add-group', [Controllers\admin\AdminController::class, 'addGroup'])->name('add-group');
+    Route::post('/create-group', [Controllers\admin\AdminController::class, 'createGroup'])->name('create-group');
     Route::get('/hapus-group/{id}', [Controllers\admin\AdminController::class, 'deleteGroup'])->name('hapus-group');
     Route::get('/detail-group/{id}', [Controllers\admin\AdminController::class, 'detailGroup'])->name('detail-group');
     Route::get('/edit-group/{id}', [Controllers\admin\AdminController::class, 'editGroup'])->name('edit-group');
-    Route::post('update-group', [Controllers\admin\AdminController::class, 'updateGroup'])->name('update-group');
-    Route::get('data-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'dataAnggotaInGroup'])->name('data-anggota-in-group');
-    Route::post('add-anggota-to-group', [Controllers\admin\AdminController::class, 'addAnggotaToGroup'])->name('add-anggota-to-group');
-    Route::get('edit-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'editAnggotaInGroup'])->name('edit-anggota-in-group');
-    Route::post('update-anggota-in-group', [Controllers\admin\AdminController::class, 'updateAnggotaInGroup'])->name('update-anggota-in-group');
-    Route::post('remove-anggota-from-group/{id}', [Controllers\admin\AdminController::class, 'removeAnggotaFromGroup'])->name('remove-anggota-from-group');
+    Route::post('/update-group', [Controllers\admin\AdminController::class, 'updateGroup'])->name('update-group');
+    Route::get('/data-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'dataAnggotaInGroup'])->name('data-anggota-in-group');
+    Route::post('/add-anggota-to-group', [Controllers\admin\AdminController::class, 'addAnggotaToGroup'])->name('add-anggota-to-group');
+    Route::get('/edit-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'editAnggotaInGroup'])->name('edit-anggota-in-group');
+    Route::post('/update-anggota-in-group', [Controllers\admin\AdminController::class, 'updateAnggotaInGroup'])->name('update-anggota-in-group');
+    Route::post('/remove-anggota-from-group/{id}', [Controllers\admin\AdminController::class, 'removeAnggotaFromGroup'])->name('remove-anggota-from-group');
 
     //NAZHIR
     Route::get('/nazhir-list', [Controllers\admin\AdminController::class, 'nazhirList'])->name('nazhir-list');
     Route::get('data-nazhir', [Controllers\admin\AdminController::class, 'getNazhir'])->name('data-nazhir');
-    // Route::get('add-nazhir', [Controllers\admin\AdminController::class, 'addNazhir'])->name('add-nazhir');
 
     //PROJEK
     Route::get('project-list', [Controllers\admin\AdminController::class, 'projectList'])->name('project-list');
@@ -132,17 +122,17 @@ Route::group([
 
     // MENU PENDAMPING
     Route::get('/pendamping-list', [Controllers\admin\AdminController::class, 'getPendamping'])->name('pendamping-list');
-    Route::get('data-pendamping', [Controllers\admin\AdminController::class, 'dataPendamping'])->name('data-pendamping');
-    Route::post('create-update-pendamping', [Controllers\admin\AdminController::class, 'createUpdatePendamping'])->name('create-update-pendamping');
-    Route::get('edit-pendamping/{id}', [Controllers\admin\AdminController::class, 'editPendamping'])->name('edit-pendamping');
-    Route::get('hapus-pendamping/{id}', [Controllers\admin\AdminController::class, 'deletePendamping'])->name('hapus-pendamping');
+    Route::get('/data-pendamping', [Controllers\admin\AdminController::class, 'dataPendamping'])->name('data-pendamping');
+    Route::post('/create-update-pendamping', [Controllers\admin\AdminController::class, 'createUpdatePendamping'])->name('create-update-pendamping');
+    Route::get('/edit-pendamping/{id}', [Controllers\admin\AdminController::class, 'editPendamping'])->name('edit-pendamping');
+    Route::get('/hapus-pendamping/{id}', [Controllers\admin\AdminController::class, 'deletePendamping'])->name('hapus-pendamping');
 
     //SETTING
-    Route::get('setting', [Controllers\admin\AdminController::class, 'getSetting'])->name('setting');
-    Route::get('data-setting', [Controllers\admin\AdminController::class, 'dataSetting'])->name('data-setting');
-    Route::post('create-update-setting', [Controllers\admin\AdminController::class, 'createUpdateSetting'])->name('create-update-setting');
-    Route::get('edit-setting/{id}', [Controllers\admin\AdminController::class, 'editSetting'])->name('edit-setting');
-    Route::get('hapus-setting/{id}', [Controllers\admin\AdminController::class, 'deleteSetting'])->name('hapus-setting');
+    Route::get('/setting', [Controllers\admin\AdminController::class, 'getSetting'])->name('setting');
+    Route::get('/data-setting', [Controllers\admin\AdminController::class, 'dataSetting'])->name('data-setting');
+    Route::post('/create-update-setting', [Controllers\admin\AdminController::class, 'createUpdateSetting'])->name('create-update-setting');
+    Route::get('/edit-setting/{id}', [Controllers\admin\AdminController::class, 'editSetting'])->name('edit-setting');
+    Route::get('/hapus-setting/{id}', [Controllers\admin\AdminController::class, 'deleteSetting'])->name('hapus-setting');
 
     //SHOW DETAIL
     Route::get('/detail-duta/{id}', [Controllers\admin\AdminController::class, 'detailDuta'])->name('detail-duta');
@@ -164,17 +154,6 @@ Route::group([
     Route::get('/editcicilan/{id}', [Controllers\admin\AdminController::class, 'editcicilan'])->name('editcicilan');
     Route::get('/hapuscicil/{id}', [Controllers\admin\AdminController::class, 'hapuscicil'])->name('hapuscicil');
     Route::post('/updatecicilan', [Controllers\admin\AdminController::class, 'updatecicil'])->name('updatecicilan');
-    Route::get('/filter-std', [Controllers\admin\AdminController::class, 'filter_std'])->name('filter-std');
-    Route::get('/filter-result', [Controllers\admin\AdminController::class, 'filter_result'])->name('filter-result');
-    Route::get('/fetch/fetch', [Controllers\admin\AdminController::class, 'fetch'])->name('fetch/fetch');
-    Route::get('/filterdata/filterdata', [Controllers\admin\AdminController::class, 'filterdata'])->name('filterdata/filterdata');
-    Route::get('/filterlistanggota', [Controllers\admin\AdminController::class, 'filterlistanggota'])->name('filterlistanggota');
-    Route::get('/filterlistanggota/filterlistanggota', [Controllers\admin\AdminController::class, 'getlistanggota'])->name('filterlistanggota/filterlistanggota');
-
-    Route::get('/filter-std-peminjam', [Controllers\admin\AdminController::class, 'filter_std_peminjam'])->name('filter-std-peminjam');
-    Route::get('/filterajuan/filterajuan', [Controllers\admin\AdminController::class, 'filterajuanajuan'])->name('filterajuan/filterajuan');
-
-    Route::get('/get-prov/{duta}', [Controllers\admin\AdminController::class, 'getProvinsi'])->name('get-prov');
 
     // DETAIL ALL APPROVAL ON PINJAM
     Route::get('/list-detail-approval-anggota/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalAnggota'])->name('list-detail-approval-anggota');

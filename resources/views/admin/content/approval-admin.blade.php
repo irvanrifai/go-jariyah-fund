@@ -301,44 +301,6 @@
     </script>
 
     <script>
-        function fetch_res() {
-            $.ajax({
-                url: "{{URL::to('admin/filter-std-peminjam')}}",
-                type: "get",
-                //dataType: "json",
-                success: function(data) {
-                    //console.log(data);
-                    data.data.forEach((data) => {
-                        let sentence = ` ${data.duta_name}`;
-                        //console.log(sentence);
-                        stdBody = `<option value="${data.duta_name}">${data.duta_name}</option>`;
-                    });
-                    $('#select_peminjam').append(stdBody);
-                }
-            })
-        };
-        fetch_res();
-
-        function fetch_std() {
-            $.ajax({
-                url: "{{URL::to('admin/filterlistanggota')}}",
-                type: "get",
-                //dataType: "json",
-                success: function(data) {
-                    console.log(data);
-                    data.data.forEach((data) => {
-                        let sentence = ` ${data.name}`;
-                        //console.log(sentence);
-                        stdBody = `<option value="${data.name}">${data.name}</option>`;
-                    });
-                    $('#select_kelompok').append(stdBody);
-                }
-            })
-        };
-        fetch_std();
-    </script>
-
-    <script>
         $(document).on('click', '.detail-ajuan', function(e) {
             e.preventDefault();
             let $this = $(this);
