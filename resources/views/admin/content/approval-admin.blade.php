@@ -87,49 +87,6 @@
 <div class="content">
     <div class="pl-2 pt-2">
         <h4 class="p-2">Data Pengajuan Pinjam <span class="text-muted">(Admin Section)</span></h4>
-        <form action="{{ url('admin/filterajuan/filterajuan') }}">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Peminjam</label>
-                        </div>
-                        <select class="custom-select" id="select_peminjam" name="peminjam">
-                            <option selected>Choose...</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Kelompok</label>
-                        </div>
-                        <select class="custom-select" id="select_kelompok" name="kelompok">
-                            <option selected>Choose...</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Status</label>
-                        </div>
-                        <select class="custom-select" id="status" name="status">
-                            <option selected>Choose...</option>
-                            <option> Request </option>
-                            <option> Accepted </option>
-                            <option> Cancel </option>
-                            <option> Reject </option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <button id="filter" type="submit" class="btn btn-md btn-outline-info">Filter</button>
-                </div>
-            </div>
-        </form>
     </div>
     <div class="card demo-icons" style="margin-top:20px;">
         <div class="card-body">

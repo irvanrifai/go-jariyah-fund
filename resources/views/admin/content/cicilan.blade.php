@@ -5,34 +5,7 @@
 @section('body')
     <div class="content">
         <div class="pl-2 pt-2">
-            <h4> Data Pengajuan Pinjam</h4>
-            <form action="{{ url('admin/filterdata/filterdata') }}">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Peminjam</label>
-                            </div>
-                            <select class="custom-select" id="select_std" name="duta_name">
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Nominal</label>
-                            </div>
-                            <select class="custom-select" id="select_res" name="nominal">
-                                <option selected>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <button id="filter" type="submit" class="btn btn-md btn-outline-info">Filter</button>
-                    </div>
-                </div>
-            </form>
+            <h4> Data Pengajuan Cicilan</h4>
         </div>
 
         <div class="row">
