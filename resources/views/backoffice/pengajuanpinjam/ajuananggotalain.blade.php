@@ -240,7 +240,7 @@
                       <th>Nominal Ajuan Pinjam</th>
                       <th>Keterangan</th>
                       <th>Cicilan</th>
-                      <th>Tanggal</th>
+                      <th>Tanggal Mengajukan</th>
                       <th>Approval</th>
                     </tr>
                   </thead>
@@ -466,7 +466,7 @@
             },
             {
                 render: function(data, type, row, meta) {
-                    return 'Mengajukan&nbsp' + ":&nbsp" + moment(row.created_at).format('lll');
+                    return moment(row.created_at).format('D MMMM YYYY, HH:mm:ss');
                 },
             },
             {

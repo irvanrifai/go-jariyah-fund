@@ -120,7 +120,7 @@
                                 <th>Nominal Ajuan</th>
                                 <th>Keterangan</th>
                                 <th>Cicilan</th>
-                                <th>Tanggal</th>
+                                <th>Tanggal Mengajukan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -507,12 +507,12 @@ const table = $('#myTable2').DataTable({
                     'id-ID') + '</br> ' + 'Modharabah&nbsp' + ":&nbsp" + "Rp&nbsp" + row
                     .cicilan_modharabah.toLocaleString('id-ID');
             },
-            orderable: true,
-            searchable: true
+            // orderable: true,
+            // searchable: true
         },
         {
             render: function(data, type, row, meta) {
-                return 'Mengajukan&nbsp' + ":&nbsp" + moment(row.created_at).format('DD-MM-YYYY');
+                return moment(row.created_at).format('D MMMM YYYY, HH:mm:ss');
             },
         },
         {

@@ -246,7 +246,7 @@
                 // {data:'note_internal', name:'note_internal'},
                 {
                     render: function(data, type, row, meta) {
-                        return moment(row.created_at).format('ddd, D MMM YYYY HH:MM');
+                        return moment(row.created_at).format('D MMMM YYYY, HH:mm:ss');
                     },
                 },
                 //{data:'updated_at', name:'updated_at'},

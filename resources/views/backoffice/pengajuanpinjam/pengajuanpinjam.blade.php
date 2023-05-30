@@ -22,7 +22,7 @@
                             <th>Deskripsi Ajuan</th>
                             <th>Keterangan</th>
                             <th>Cicilan</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Mengajukan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -158,7 +158,7 @@
                 },
                 {
                     render: function(data, type, row, meta) {
-                        return 'Mengajukan&nbsp' + ":&nbsp" + moment(row.created_at).format('ddd, D MMM YYYY HH:MM');
+                        return moment(row.created_at).format('D MMMM YYYY, HH:mm:ss');
                     },
 
                 },
