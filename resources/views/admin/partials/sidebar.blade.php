@@ -98,7 +98,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item">
                   <a href="{{ url('admin/approval-pendamping/request-pinjam') }}" class="nav-link {{ Request::is('admin/approval-pendamping/request-pinjam') ? 'active' : '' }}">
-                      <i class="nav-icon fas fa-users text-info"></i>
+                      <i class="nav-icon fas fa-users"></i>
                       <p>Approval Pendamping</p>
                   </a>
               </li>
@@ -107,7 +107,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item">
                   <a href="{{ url('admin/approval-nazhir/request-pinjam') }}" class="nav-link {{ Request::is('admin/approval-nazhir/request-pinjam') ? 'active' : '' }}">
-                      <i class="nav-icon fas fa-users text-success"></i>
+                      <i class="nav-icon fas fa-users-cog"></i>
                       <p>Approval Nazhir</p>
                   </a>
               </li>
