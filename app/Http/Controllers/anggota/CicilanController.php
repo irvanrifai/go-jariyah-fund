@@ -12,37 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class CicilanController extends Controller
 {
-    public function index($id){
-        $data= CicilanModel::findOrFail($id);
-        return view ('backoffice/pengajuanpinjam/detailajuanpinjam')->with(['data' => $data,'id'=>$id]);
-    }
-
-    public function edit($id){
-        $data = CicilanModel::find($id);
-        return view('backoffice/riwayatpeminjaman/editdata')->with(['editcicil' => $data,'id'=>$id]);
-    }
-
-    public function update($id, Request $request){
-        $editcicil = CicilanModel::find($id);
-
-        $editcicil->nominal   = $request->input('nominal');
-
-        $editcicil->update();
-        return view('backoffice/pengajuanpinjam/pengajuanpinjam');
-        return back()->with('succes','Data Berhasil Di Edit');
-    }
-
-    public function detail($id){
-        $data= CicilanModel::findOrFail($id);
-        //dd($data);
-       return view('backoffice/riwayatpeminjaman/detailcicil')->with(['data' => $data,'id'=>$id]);
-    }
-
-    public function addCicil(){
-        $ket=jf_pinjam::all();
-        return view('backoffice/riwayatpeminjaman/tambahCicilan', compact('ket'));
-    }
-
     public function createCicilan(Request $request){
         // NEED MANY ADJUSTMENT IN BE-FE, on BE simplify code, on FE change with modal and current bayar cicil is strict depend on pinjaman selected
         $cicilan = Validator::make($request->all(), [

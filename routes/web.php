@@ -187,10 +187,6 @@ Route::group([
     Route::get('chart-pinjaman-aktif-all', [Controllers\anggota\DashboardController::class, 'chartPinjamanAktifAll'])->name('chart-pinjaman-aktif-all');
     Route::get('chart-akumulasi-all', [Controllers\anggota\DashboardController::class, 'chartAkumulasiAll'])->name('chart-akumulasi-all');
 
-    //ANGGOTA LAIN
-    Route::get('/ajuananggotalain', [Controllers\anggota\PengajuanPinjamController::class, 'lain'])->name('ajuananggotalain');
-    Route::get('/data-ajuan-anggota-lain', [Controllers\anggota\PengajuanPinjamController::class, 'dataAjuanAnggotaLain'])->name('data-ajuan-anggota-lain');
-
     //RIWAYAT PINJAMAN
     Route::get('/riwayatpeminjaman', [Controllers\anggota\RiwayatPeminjamanController::class, 'index'])->name('riwayatpeminjaman');
     Route::get('/hapusriwayatpeminjaman/{id}', [Controllers\anggota\RiwayatPeminjamanController::class, 'delete'])->name('hapusriwayatpeminjaman');
@@ -212,15 +208,19 @@ Route::group([
     Route::get('/detail-cicilan/{id}', [Controllers\anggota\CicilanController::class, 'detailCicilan'])->name('detail-cicilan');
 
     //PENGAJUAN PINJAMAN
-    Route::get('/pengajuanpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'index'])->name('pengajuanpinjam'); //MENAMPILKAN DATA DALAM TABEL
-    Route::post('/tambahpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'store'])->name('tambahpinjam'); //SETELAH KLIK TOMBOL SUBMIT
-    Route::get('/ajuanpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'input'])->name('ajuanpinjam'); //MENGARAH KE FORM TAMBAH DATA
+    Route::get('/pinjam/my', [Controllers\anggota\PengajuanPinjamController::class, 'myPinjam'])->name('pinjam.my');
+    Route::get('/pinjam/request', [Controllers\anggota\PengajuanPinjamController::class, 'requestPinjam'])->name('pinjam.request');
+    Route::post('/tambahpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'store'])->name('tambahpinjam');
     Route::get('/datapengajuanpinjam/ajuan', [Controllers\anggota\PengajuanPinjamController::class, 'dataajuan'])->name('datapengajuanpinjam.ajuan');
     Route::get('/hapusajuanpinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'delete'])->name('hapusajuanpinjam');
     Route::get('/edit-pinjaman/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'edit'])->name('edit-pinjaman');
     Route::post('/update-pinjaman', [Controllers\anggota\PengajuanPinjamController::class, 'update'])->name('update-pinjaman');
-    Route::get('/detailajuanpinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detail'])->name('detailajuanpinjam');
-    Route::get('/totalajuanpribadi', [Controllers\anggota\PengajuanPinjamController::class, 'totalajuanpribadi'])->name('totalajuanpribadi'); //SETELAH KLIK TOMBOL SUBMIT
+    Route::get('/detail-request-pinjam-extend/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detailRequestPinjamExtend'])->name('detail-request-pinjam-extend');
+    Route::get('/totalajuanpribadi', [Controllers\anggota\PengajuanPinjamController::class, 'totalajuanpribadi'])->name('totalajuanpribadi');
+
+    //ANGGOTA LAIN
+    Route::get('/pinjam/other', [Controllers\anggota\PengajuanPinjamController::class, 'requestOther'])->name('pinjam.other');
+    Route::get('/data-ajuan-anggota-lain', [Controllers\anggota\PengajuanPinjamController::class, 'dataAjuanAnggotaLain'])->name('data-ajuan-anggota-lain');
 
     // DETAIL ALL APPROVAL ON PINJAM
     Route::get('/list-detail-approval-anggota/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'listDetailApprovalAnggota'])->name('list-detail-approval-anggota');
@@ -249,13 +249,17 @@ Route::group([
     Route::get('check-is-step-six-complete/{id}', [Controllers\TrackingPinjamanAnggotaController::class, 'checkIsStepSixComplete'])->name('check-is-step-six-complete');
 
     // UNDER DEVELOPMENT
-    Route::get('/simulasipinjam', [Controllers\anggota\SimulasiPinjamController::class, 'index'])->name('simulasipinjam');
+    Route::get('/simulation', [Controllers\anggota\SimulasiPinjamController::class, 'index'])->name('simulasipinjam');
     Route::get('/statistik', [Controllers\anggota\StatistikController::class, 'index'])->name('statistik');
     Route::get('/peruntukan', [Controllers\anggota\PeruntukanController::class, 'index'])->name('peruntukan');
 });
 
 
 Route::get('/backoffice', function(){
+    return response("Whooopsss!", 404);
+});
+
+Route::get('/backoffice/*', function(){
     return response("Whooopsss!", 404);
 });
 

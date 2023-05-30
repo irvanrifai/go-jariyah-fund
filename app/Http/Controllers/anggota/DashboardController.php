@@ -85,7 +85,7 @@ class DashboardController extends Controller
             ->count();
         }
 
-        return view('backoffice.dashboard')->with(compact(
+        return view('anggota.content.dashboard')->with(compact(
             'user_ajuan',
             'user_ajuan_acc',
             'group_ajuan',

@@ -24,19 +24,15 @@ class PengajuanPinjamController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth');
-        //$this->middleware('role:user');
-        // $this->RiwayatPeminjaman = new RiwayatPeminjamanController();
+        $this->middleware('auth');
     }
 
-    public function index()
+    public function myPinjam()
     {
-        // $data = jf_pinjam::all();
-
-        return view('backoffice/pengajuanpinjam/pengajuanpinjam');
+        return view('anggota.content.my-pinjam-list');
     }
 
-    public function input()
+    public function requestPinjam()
     {
         // get data user status in group
         $user = auth()->user();
@@ -180,11 +176,11 @@ class PengajuanPinjamController extends Controller
 
         if (count($transaction_pinjam) > 0){
             // user can't apply (request pinjam before is incomplete)
-            return view('backoffice.pengajuanpinjam.index3');
+            return view('anggota.content.request-pinjam-incomplete');
         } else {
             // user can apply for loan (user status active)
             if ($data_group->status === 1){
-                return view('backoffice.pengajuanpinjam.index', [
+                return view('anggota.content.request-pinjam-form', [
                     'min_pinjam' => $min_pinjam,
                     'max_pinjam' => $max_pinjam,
                     'max_tenor' => $max_tenor,
@@ -194,9 +190,9 @@ class PengajuanPinjamController extends Controller
 
             // user can't apply (user status inactive or frezze)
             } else if ($data_group->status === null || $data_group->status === 0 || $data_group->status === 2){
-                return view('backoffice.pengajuanpinjam.index2');
+                return view('anggota.content.request-pinjam-freeze');
             } else {
-                return view('backoffice.pengajuanpinjam.index2');
+                return view('anggota.content.request-pinjam-freeze');
             }
         }
 
@@ -228,7 +224,7 @@ class PengajuanPinjamController extends Controller
             return datatables()->of($data)
                 ->addColumn('action', function ($key) {
                     $actionBtn = "<div class='d-flex justify-content-between'>
-                    <a role='button' class='btn-sm btn-info' title='Detail' href='/anggota/detailajuanpinjam/" . $key->id . "' data-content='Detail'>
+                    <a role='button' class='btn-sm btn-info' title='Detail' href='/anggota/detail-request-pinjam-extend/" . $key->id . "' data-content='Detail'>
                     <i class='fas fa-eye'></i></a>
                     <a role='button' class='btn-sm btn-warning edit-pinjaman' title='Edit' data-id='$key->id' data-content='Edit'>
                     <i class='fas fa-pen-fancy'></i></a>
@@ -550,7 +546,7 @@ class PengajuanPinjamController extends Controller
         }
     }
 
-    public function detail($id)
+    public function detailRequestPinjamExtend($id)
     {
         $data = DB::table('jf_pinjam')->where('jf_pinjam.id', $id)
         ->select('jf_pinjam.*')
@@ -621,7 +617,7 @@ class PengajuanPinjamController extends Controller
         }
         $data->is_show_cicilan = $is_show_cicilan;
 
-        return view('backoffice/pengajuanpinjam/detailajuanpinjam')->with(['data' => $data]);
+        return view('anggota.content.detail-request-pinjam-extend')->with(['data' => $data]);
     }
 
     public function listDetailApprovalAnggota(Request $request, $id){
@@ -854,9 +850,9 @@ class PengajuanPinjamController extends Controller
         }
     }
 
-    public function lain()
+    public function requestOther()
     {
-        return view('backoffice/pengajuanpinjam/ajuananggotalain');
+        return view('anggota.content.other-pinjam-list');
     }
 
     public function dataAjuanAnggotaLain(Request $request){
@@ -884,7 +880,7 @@ class PengajuanPinjamController extends Controller
                     $actionBtn = "
                     <a role='button' class='detail-request-pinjam btn-info btn-sm' title='Perijinan Anda' data-id=". $key->id ."' data-content='Popover body content is set in this attribute.'>
                     <i class='fas fa-user-plus'></i></a>
-                    <a role='button' class='btn-sm btn-info' title='Detail' href='/anggota/detailajuanpinjam/" . $key->id . "' data-content='Detail'>
+                    <a role='button' class='btn-sm btn-info' title='Detail' href='/anggota/detail-request-pinjam-extend/" . $key->id . "' data-content='Detail'>
                     <i class='fas fa-eye'></i></a>
                 </button>";
                     return $actionBtn;

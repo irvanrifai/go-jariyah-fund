@@ -1,14 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Riwayat Peminjaman')
+@section('title', 'Peminjaman Saya')
 
-@section('content_header_title','Riwayat Peminjaman')
+@section('content_header_title','Peminjaman Saya')
 @section('content_header_prev_link','/anggota/dashboard')
 @section('content_header_prev_text','Dashboard')
-
-@section('content_header')
-<h1 class="m-0 text-dark">Riwayat Peminjaman</h1>
-@stop
 
 @section('content')
 <div class="card-header">

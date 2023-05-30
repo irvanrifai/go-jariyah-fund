@@ -245,19 +245,19 @@ return [
             'submenu' => [
                 [
                     'text' => 'Pinjaman Saya',
-                    'url' => 'anggota/pengajuanpinjam',
+                    'url' => 'anggota/pinjam/my',
                 ],
                 [
                     'text' => 'Pengajuan Pinjam',
-                    'url' => 'anggota/ajuanpinjam',
+                    'url' => 'anggota/pinjam/request',
                 ],
                 [
                     'text' => 'Pinjaman Anggota Lain',
-                    'url' => 'anggota/ajuananggotalain',
+                    'url' => 'anggota/pinjam/other',
                 ],
                 [
                     'text' => 'Simulasi Pinjam',
-                    'url' => 'anggota/simulasipinjam',
+                    'url' => 'anggota/simulation',
                 ],
             ]
         ],

@@ -1,8 +1,8 @@
 @extends('adminlte::page')
 
-@section('title', 'Ajuan Anggota Lain')
+@section('title', 'Pinjaman Anggota Lain')
 
-@section('content_header_title','Ajuan Anggota Lain')
+@section('content_header_title','Pinjaman Anggota Lain')
 @section('content_header_prev_link','/anggota/dashboard')
 @section('content_header_prev_text','Dashboard')
 

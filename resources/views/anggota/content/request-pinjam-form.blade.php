@@ -3,7 +3,8 @@
 @section('title', 'Pengajuan Peminjaman')
 
 @section('content_header_title','Pengajuan Peminjaman')
-@section('content_header_prev_link','/backoffice/posts')
+@section('content_header_prev_link','/anggota/dashboard')
+@section('content_header_prev_text','Dashboard')
 
 
 @section('plugins.Summernote', true)
