@@ -251,7 +251,7 @@ class PengajuanPinjamController extends Controller
 
         if (count($transaction_pinjam) > 0){
             // user can't apply (request pinjam before is incomplete)
-            return view('backoffice.pengajuanpinjam.index3');
+            return view('anggota.content.request-pinjam-incomplete');
         }
 
         // must have validation if max pinjam is (-) or 0 user cannot request pinjam
@@ -348,7 +348,7 @@ class PengajuanPinjamController extends Controller
             app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($pinjam->id, Carbon::now());
 
             // soon give sw / message
-            return redirect()->route('anggota.pengajuanpinjam');
+            return redirect()->route('anggota.pinjam.my');
         } else {
             // soon give sw / message
             return back();
@@ -677,34 +677,6 @@ class PengajuanPinjamController extends Controller
         }
     }
 
-    public function detailaprove($id)
-    {
-        $data = DB::table('jf_pinjam')->where('jf_pinjam.id', $id)
-        ->join('jf_group_anggota', 'jf_pinjam.group_anggota_id', '=', 'jf_group_anggota.id')
-        ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
-        ->select('pa_duta_wakaf.duta_name as name_requester', 'jf_pinjam.*')->first();
-        // dd($data);
-        $aprove = DB::table('jf_pinjam')
-        ->where('jf_pinjam.id', $id)
-        ->join('jf_pinjam_approval', 'jf_pinjam.id', '=', 'jf_pinjam_approval.pinjam_id')
-        ->join('jf_group_anggota', 'jf_pinjam_approval.group_anggota_id', '=', 'jf_group_anggota.id')
-        ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
-        ->select(
-            'jf_pinjam.desc_request as de',
-            'jf_pinjam_approval.id',
-            'jf_pinjam_approval.created_at as dt',
-            'jf_pinjam_approval.user_agent',
-            'jf_pinjam_approval.status',
-            'jf_pinjam_approval.accepted_at',
-            'jf_pinjam_approval.group_anggota_id',
-            'jf_pinjam_approval.note',
-            'pa_duta_wakaf.duta_name as name_who_approved'
-        )
-        ->get();
-        // dd($aprove);
-        return view('backoffice/pengajuanpinjam/detailaprove')->with(['data' => $data, 'aprove' => $aprove, 'id' => $id]);
-    }
-
     public function detailRequestPinjam($id)
     {
         // old
@@ -752,30 +724,6 @@ class PengajuanPinjamController extends Controller
                 'message' => 'Data Not Found',
             ]);
         }
-    }
-
-    public function updateaprove($id, Request $request)
-    {
-        $group = jf_pinjam_approval::find($id);
-        $group->pinjam_id   = $request->input('pinjam_id');
-        $group->group_anggota_id   = $request->input('group_anggota_id');
-        $group->accepted_at   = $request->input('accepted_at');
-        $group->status = $request->input('status');
-        $group->update();
-
-        $user = auth()->user()->id;
-        $data = DB::table('jf_pinjam')->select(
-            'jf_pinjam.*'
-        )->where('jf_pinjam.group_anggota_id', $user)->get();
-        //dd($data);
-        return view('backoffice/pengajuanpinjam/pengajuanpinjam')->with(['data' => $data]);
-    }
-
-    public function addAprove()
-    {
-        $ket = jf_pinjam::all();
-        $desa = VillageModel::all();
-        return view('backoffice/riwayatpeminjaman/tambahAprove', compact('ket', 'desa'));
     }
 
     public function createUpdateApprovalPinjam(Request $request)
@@ -888,117 +836,5 @@ class PengajuanPinjamController extends Controller
                 ->rawColumns(['action'])
                 ->toJson();
         }
-    }
-
-    public function editaproveaprove($id)
-    {
-        $data = jf_pinjam_approval::find($id);
-        return view('backoffice/pengajuanpinjam/editaproveaprove')->with(['data' => $data]);
-    }
-
-    public function updateaproveaprove($id, Request $request)
-    {
-        /* $aprove = DB::table('jf_pinjam_approval')->select(
-            '*'
-        )->where('jf_pinjam_approval.id',$id)->get();
-        //dd($aprove);*/
-        $data = jf_pinjam_approval::find($id);
-        dd($request->radio);
-        $data->status   = $request->input('radio');
-        $data->note   = $request->input('note');
-        $data->update();
-
-        $user = auth()->user()->id;
-        $data = DB::table('jf_pinjam')->select(
-            'jf_pinjam.*'
-        )->where('jf_pinjam.group_anggota_id', $user)->get();
-        //dd($data);
-        return view('backoffice/pengajuanpinjam/pengajuanpinjam')->with(['data' => $data]);
-    }
-
-    public function getaproveaprove($id)
-    {
-        $aprove = jf_pinjam_approval::find($id);
-        // dd($aprove);
-        if ($aprove) {
-            return response()->json([
-                'status' => 200,
-                'aprove' => $aprove,
-            ]);
-            // dd($aprove);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Data Not Found',
-            ]);
-        }
-    }
-
-    public function detailaproveaprove($id)
-    {
-        //$data= jf_pinjam_approval::findOrFail($id);
-
-        $duta = DB::table('jf_pinjam_approval')->select(
-            'jf_pinjam.desc_request as de',
-            'jf_group_anggota.group_id',
-            'jf_group_anggota.name',
-            //'*',
-            'jf_pinjam_approval.id',
-            'jf_pinjam_approval.created_at as dt',
-            'jf_pinjam_approval.user_agent',
-            'jf_pinjam_approval.status',
-            'jf_pinjam_approval.accepted_at',
-            'jf_pinjam_approval.group_anggota_id',
-            'jf_pinjam_approval.note',
-        )->where('jf_pinjam_approval.id', $id);
-        //dd($duta);
-        $duta = $duta
-            ->join('jf_pinjam', 'jf_pinjam_approval.pinjam_id', '=', 'jf_pinjam.id')
-            ->join('jf_group_anggota', 'jf_pinjam_approval.group_anggota_id', '=', 'jf_group_anggota.id')
-            ->get();
-        //dd($aprove);*/
-        return view('backoffice/pengajuanpinjam/detailaproveaprove', compact('duta'));
-    }
-
-    public function tes()
-    {
-        $user = auth()->user()->id;
-        $code = auth()->user()->duta_refcode;
-        // dd($code);
-        $duta_wakaf = duta_wakaf::where('id', $user)->where('duta_refcode', $code)->first();
-        //dd($duta_wakaf);
-        if ($duta_wakaf) {
-            $dbpercent = jf_setting::where('key', 'max_pinjam_pribadi_percent')->first()->value;
-
-            $req = DB::select(DB::raw("select sum(nominal_request) as req
-        from pa_duta_wakaf JOIN jf_group_anggota ON pa_duta_wakaf.id=jf_group_anggota.duta_wakaf_id
-        JOIN jf_pinjam ON jf_group_anggota.id=jf_pinjam.group_anggota_id
-        WHERE pa_duta_wakaf.id='$user'"));
-            //dd($req);
-            $Data = "";
-            foreach ($req as $list) {
-                $Data .= $list->req;
-            }
-            $arr = rtrim($Data);
-            //dd($Data);
-
-
-            $res = DB::select(DB::raw("select sum(wakaf_base*$dbpercent/100) as count
-        from pa_transaction JOIN pa_duta_wakaf
-        ON pa_transaction.ref_code=pa_duta_wakaf.duta_refcode
-        WHERE pa_duta_wakaf.duta_refcode='$code'"));
-            //dd($res);
-            $charData = "";
-            foreach ($res as $list) {
-                $charData .= $list->count;
-            }
-            $arr = rtrim($charData);
-            //echo $charData;
-            //dd($charData, $Data);
-        } else {
-            return back();
-        }
-        $final = (int)$charData - (int)$Data;
-        dd($final);
     }
 }
