@@ -187,15 +187,6 @@ Route::group([
     Route::get('chart-pinjaman-aktif-all', [Controllers\anggota\DashboardController::class, 'chartPinjamanAktifAll'])->name('chart-pinjaman-aktif-all');
     Route::get('chart-akumulasi-all', [Controllers\anggota\DashboardController::class, 'chartAkumulasiAll'])->name('chart-akumulasi-all');
 
-    //RIWAYAT PINJAMAN
-    Route::get('/riwayatpeminjaman', [Controllers\anggota\RiwayatPeminjamanController::class, 'index'])->name('riwayatpeminjaman');
-    Route::get('/hapusriwayatpeminjaman/{id}', [Controllers\anggota\RiwayatPeminjamanController::class, 'delete'])->name('hapusriwayatpeminjaman');
-    Route::get('/indexriwayatpeminjaman', [Controllers\anggota\RiwayatPeminjamanController::class, 'input'])->name('indexriwayatpeminjaman');
-    Route::get('/detail-1/{id}', [Controllers\anggota\RiwayatPeminjamanController::class, 'detaildataajuan'])->name('detail-1');
-    Route::get('/detail-2/{id}', [Controllers\anggota\RiwayatPeminjamanController::class, 'cicilan'])->name('detail-2');
-    Route::get('/detail-3/approve', [Controllers\anggota\RiwayatPeminjamanController::class, 'approve'])->name('detail-3.approve');
-    Route::get('/totaldata', [Controllers\anggota\RiwayatPeminjamanController::class, 'totaldata'])->name('totaldata');
-
     Route::get('/indexdetail/{id}', [Controllers\anggota\CicilanController::class, 'index'])->name('indexdetail');
     Route::get('/editcicil/{id}', [Controllers\anggota\CicilanController::class, 'edit'])->name('editcicil');
     Route::post('/updatecicil/{id}', [Controllers\anggota\CicilanController::class, 'update'])->name('updatecicil');

@@ -171,63 +171,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
 
-{{-- parsing data with foreach --}}
-{{-- <div class="row">
-  <div class="col">
-    <table id="myTable" class="table table-hover" width='100%'>
-      <thead class="thead-light">
-        <tr>
-          <th>Nama Peminjam</th>
-          <th>Nominal Ajuan Pinjam</th>
-          <th>Keterangan</th>
-          <th>Cicilan</th>
-          <th>Tanggal</th>
-          <th>Action</th>
-        </tr>
-        @foreach($data as $k)
-        <tr>
-          <td>{{$k->duta_name}}</td>
-          <td>
-            <?php echo '<i class="fa fa-clock text-danger"></i>&nbsp&nbsp' ?>{{"Rp". number_format($k->nominal_request)}}</br>
-            <?php echo '<i class="fa fa-check-circle text-success"></i>&nbsp&nbsp&nbsp' ?>{{"Rp". number_format($k->nominal_accepted)}}
-          </td>
-
-          <td>
-            <?php
-            if ($k->status == 'request') {
-              echo '<span class="badge badge-secondary badge-pill">Request</span></br>';
-            } else if ($k->status == 'accepted') {
-              echo '<span class="badge badge-success badge-pill">Accepted</span></br>';
-            } else if ($k->status == 'cancel') {
-              echo '<span class="badge badge-secondary badge-pill">Cancel</span></br>';
-            } else {
-              echo '<span class="badge badge-danger badge-pill">Reject</span></br>';
-            }
-            ?> {{$k->tenor}} <?php echo 'Bulan' ?>
-          </td>
-          <td>
-            <?php echo "Total&nbsp;:&nbsp;" ?>{{"Rp". number_format($k->cicilan_perbulan)}}</br>
-            <?php echo "Pokok&nbsp;:&nbsp;" ?>{{"Rp". number_format($k->cicilan_pokok)}}</br>
-            <?php echo "Mudharabah&nbsp;:&nbsp;" ?>{{"Rp". number_format($k->cicilan_modharabah)}}
-          </td>
-
-          <td>
-            <?php echo "Mengajukan&nbsp;:&nbsp;" ?>{{Carbon\Carbon::parse($k->created_at)->format('Y-m-d H:m')." WIB"}}</br>
-            <?php echo "Disetujui&nbsp;:&nbsp;" ?>{{Carbon\Carbon::parse($k->accepted_hji_at)->format('Y-m-d H:m')." WIB"}}</br>
-            <?php echo "Dana Cair&nbsp;:&nbsp;" ?>
-          </td>
-          <td>
-            <a type="button" data-id="<?= $k->id; ?>" title="Ubah Perijinan" class="edit_approve btn-success btn-sm"> <i class='fas fa-check'></i></a>
-            <a role="button" class="btn-info btn-sm" title="Detail" title='Lihat Status' href='/anggota/detailaprove/{{$k->id}}' data-content="Popover body content is set in this attribute.">
-              <i class='fas fa-eye'></i></a>
-          </td>
-        </tr>
-        @endforeach
-      </thead>
-    </table>
-  </div>
-</div> --}}
-
 {{-- parsing data with datatable --}}
 <div class="card-header">
     <div class="row">
