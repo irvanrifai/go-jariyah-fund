@@ -32,20 +32,36 @@ class PendampingController extends Controller
         ->join('jf_group', 'jf_group_anggota.group_id', '=', 'jf_group.id')
         ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')->get();
         // dd($data);
+
+        // init get data from setting value of max approve by pendamping
+        $max_approval = DB::table('jf_setting')->where('key', 'amount_approval_pendamping')->first()->value;
+
+        $data_filtered = [];
+
+        // for loop to check is request still can approved by pendamping (req done approval & status request)
+        for ($i = 0; $i < count($data); $i++){
+            if (DB::table('jf_pinjam_approval_by_pendamping')->where('pinjam_id', $data[$i]->id)->get() < $max_approval && $data[$i]->status == 'request'){
+                array_push($data_filtered, $data[$i]);
+            }
+        }
+
+        // dd($data);
+        // dd($data_filtered);
+
         if ($request->ajax()) {
-            return datatables()->of($data)
-                ->addColumn('action', function ($data) {
+            return datatables()->of($data_filtered)
+                ->addColumn('action', function ($data_filtered) {
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
+                    <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data_filtered->id' style='color:white;' title='Perijinan Anda'>
                     <i class='fas fa-user-plus'></i></a>
-                    <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
+                    <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data_filtered->id . "'>
                     <i class='fas fa-users'></i></a>
                     ";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->toJson();
-                // <a role='button' class='btn-sm btn-danger hapus' data-id='$data->id' style='color:white;' title='Hapus'>
+                // <a role='button' class='btn-sm btn-danger hapus' data-id='$data_filtered->id' style='color:white;' title='Hapus'>
                 // <i class='fas fa-trash'></i></a>
         }
     }
