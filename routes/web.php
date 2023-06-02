@@ -222,6 +222,7 @@ Route::group([
     //APPROVE
     Route::get('/detailaprove/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detailaprove'])->name('detailaprove');
     Route::get('detail-request-pinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detailRequestPinjam'])->name('detail-request-pinjam');
+    Route::get('data-pinjam-approval-by-other-anggota/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'dataPinjamApprovalByOtherAnggota'])->name('data-pinjam-approval-by-other-anggota'); 
     Route::get('/updateaprove/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'updateaprove'])->name('updateaprove');
     Route::post('/create-update-approval-pinjam', [Controllers\anggota\PengajuanPinjamController::class, 'createUpdateApprovalPinjam'])->name('create-update-approval-pinjam');
     Route::post('/delete-approval-pinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'deleteApprovalPinjam'])->name('delete-approval-pinjam');

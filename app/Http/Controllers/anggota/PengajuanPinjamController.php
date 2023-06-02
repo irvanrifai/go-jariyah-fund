@@ -726,6 +726,41 @@ class PengajuanPinjamController extends Controller
         }
     }
 
+    public function dataPinjamApprovalByOtherAnggota(Request $request, $id){
+        $user = auth()->user();
+        $data = DB::table('jf_pinjam')
+        ->where('jf_pinjam.id', $id)
+        ->join('jf_pinjam_approval', 'jf_pinjam.id', '=', 'jf_pinjam_approval.pinjam_id')
+        ->join('jf_group_anggota', 'jf_pinjam_approval.group_anggota_id', '=', 'jf_group_anggota.id')
+        ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
+        ->where('jf_group_anggota.duta_wakaf_id', $user->id)
+        ->select
+        (
+            'pa_duta_wakaf.duta_name as name',
+            'jf_pinjam_approval.status',
+            'jf_pinjam_approval.note',
+            'jf_pinjam_approval.accepted_at',
+            'jf_pinjam_approval.id as id'
+        )
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+
+            return datatables()->of($data)
+                ->addColumn('action', function ($key) {
+                    $actionBtn = "<div class='d-flex justify-content-between'>
+                    <a role='button' class='btn-sm btn-warning edit-approval' title='Edit Approval' data-id='$key->id' data-content='Edit'>
+                    <i class='fas fa-pen-fancy'></i></a>
+                    </div>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->toJson();
+        }
+    }
+
     public function createUpdateApprovalPinjam(Request $request)
     {
         // init data user to get who approve pinjaman
@@ -826,8 +861,8 @@ class PengajuanPinjamController extends Controller
             return datatables()->of($all_pinjaman)
                 ->addColumn('action', function ($key) {
                     $actionBtn = "
-                    <a role='button' class='detail-request-pinjam btn-info btn-sm' title='Perijinan Anda' data-id=". $key->id ."' data-content='Popover body content is set in this attribute.'>
-                    <i class='fas fa-user-plus'></i></a>
+                    <a role='button' class='detail-request-pinjam btn-success btn-sm' title='Approval' data-id=". $key->id ."' data-content='Approval'>
+                    <i class='fas fa-check-circle'></i></a>
                     <a role='button' class='btn-sm btn-info' title='Detail' href='/anggota/detail-request-pinjam-extend/" . $key->id . "' data-content='Detail'>
                     <i class='fas fa-eye'></i></a>
                 </button>";
