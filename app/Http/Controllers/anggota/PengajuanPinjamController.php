@@ -845,6 +845,9 @@ class PengajuanPinjamController extends Controller
         // get data group that same with user auth
         $group = DB::table('jf_group_anggota')
         ->where('duta_wakaf_id', $user->id)->first();
+
+        $amount_anggota_in_group = DB::table('jf_group_anggota')->where('group_id', $group->group_id);
+
         // get data all pinjaman user except pinjaman user auth that one group with user auth
         $all_pinjaman = DB::table('jf_pinjam')
         // ->join('jf_pinjam_approval', 'jf_pinjam.id', '=', 'jf_pinjam_approval.pinjam_id')
@@ -856,9 +859,18 @@ class PengajuanPinjamController extends Controller
         ->select('pa_duta_wakaf.duta_name', 'jf_pinjam.*')
         ->get();
 
+        $data = [];
+
+        // for loop to check is request still can approved by other anggota (req done approval & status request)
+        for ($i = 0; $i < count($all_pinjaman); $i++){
+            if ( count(jf_pinjam_approval::where('pinjam_id', $all_pinjaman[$i]->id)->get()) < (count($amount_anggota_in_group->get()) - 1) && $all_pinjaman[$i]->status == 'request'){
+                array_push($data, $all_pinjaman[$i]);
+            }
+        }
+
         // request ajax-datatable
         if ($request->ajax()) {
-            return datatables()->of($all_pinjaman)
+            return datatables()->of($data)
                 ->addColumn('action', function ($key) {
                     $actionBtn = "
                     <a role='button' class='detail-request-pinjam btn-success btn-sm' title='Approval' data-id=". $key->id ."' data-content='Approval'>
