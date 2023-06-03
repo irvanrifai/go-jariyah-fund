@@ -833,8 +833,8 @@ class AdminController extends Controller
                 ->addColumn('action', function ($data) {
                     if ($data->status != 'request') {
                         $actionBtn = "
-                        <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
-                        <i class='fas fa-user-plus'></i></a>
+                        <a role='button' class='btn-sm btn-success detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
+                        <i class='fas fa-check-circle'></i></a>
                         <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
                         <i class='fas fa-users'></i></a>
                         <a role='button' class='btn-sm btn-light mark-as-done-" . $data->id . "' data-id='$data->id' style='color:grey;' title='Mark as done' onclick='markAsDone(event, $data->id)'>
@@ -842,8 +842,8 @@ class AdminController extends Controller
                         ";
                     } else {
                         $actionBtn = "
-                        <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
-                        <i class='fas fa-user-plus'></i></a>
+                        <a role='button' class='btn-sm btn-success detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
+                        <i class='fas fa-check-circle'></i></a>
                         <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
                         <i class='fas fa-users'></i></a>
                         ";
@@ -951,24 +951,24 @@ class AdminController extends Controller
 
         // add log to tracking (approval admin)
         app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, Carbon::now());
-        
+
         return response()->json([
             'status' => 200,
             'message' => 'Data success stored'
         ]);
     }
-    
+
     public function markAsDone(Request $request){
         if ($request->id_loan){
             $data = jf_pinjam::find($request->id_loan);
-            
+
             if ($data){
                 $data->is_complete = 1;
                 $data->update();
-                
+
                 // add log to tracking (ajuan pinjam mark as ready)
                 app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, null, Carbon::now());
-    
+
                 return response()->json([
                     'status' => 200,
                     'message' => 'Data updated!'

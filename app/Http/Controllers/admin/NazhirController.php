@@ -48,8 +48,8 @@ class NazhirController extends Controller
             return datatables()->of($data_filtered)
                 ->addColumn('action', function ($data_filtered) {
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data_filtered->id' style='color:white;' title='Perijinan Anda'>
-                    <i class='fas fa-user-plus'></i></a>
+                    <a role='button' class='btn-sm btn-success detail-ajuan' data-id='$data_filtered->id' style='color:white;' title='Perijinan Anda'>
+                    <i class='fas fa-check-circle'></i></a>
                     <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data_filtered->id . "'>
                     <i class='fas fa-users'></i></a>
                     ";
