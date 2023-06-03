@@ -68,8 +68,7 @@ Route::group([
 
     //PENGAJUAN PINJAM
     Route::get('/approval-admin/request-pinjam', [Controllers\admin\AdminController::class, 'requestPinjam'])->name('approval-admin.request-pinjam');
-    Route::get('/pengajuanpinjam/pengajuanpinjam', [Controllers\admin\AdminController::class, 'pengajuanpinjam'])->name('pengajuanpinjam.pengajuanpinjam');
-    Route::get('/lihatlistapproval/{id}', [Controllers\admin\AdminController::class, 'lihatlistaproval'])->name('lihatlistapproval');
+    Route::get('/approval-admin/data-request-pinjam', [Controllers\admin\AdminController::class, 'dataRequestPinjam'])->name('approval-admin.data-request-pinjam');
 
     //CICILAN
     Route::get('/approval-admin/request-cicilan', [Controllers\admin\AdminController::class, 'requestCicilan'])->name('approval-admin.request-cicilan');

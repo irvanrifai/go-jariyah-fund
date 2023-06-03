@@ -814,7 +814,7 @@ class AdminController extends Controller
         return view('admin.content.approval-admin');
     }
 
-    public function pengajuanpinjam(Request $request)
+    public function dataRequestPinjam(Request $request)
     {
         $data = DB::table('jf_pinjam')->select(
             'jf_pinjam.*',

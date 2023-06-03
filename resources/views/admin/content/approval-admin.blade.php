@@ -135,7 +135,7 @@
             serverSide: true,
             responsive: true,
             ajax: {
-                url : "{{ route('admin.pengajuanpinjam.pengajuanpinjam') }}",
+                url : "{{ route('admin.approval-admin.data-request-pinjam') }}",
                 type: "GET"
             },
             columns: [{
