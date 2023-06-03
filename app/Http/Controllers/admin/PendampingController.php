@@ -36,11 +36,12 @@ class PendampingController extends Controller
         // init get data from setting value of max approve by pendamping
         $max_approval = DB::table('jf_setting')->where('key', 'amount_approval_pendamping')->first()->value;
 
+        // init empty array for item filtered
         $data_filtered = [];
 
         // for loop to check is request still can approved by pendamping (req done approval & status request)
         for ($i = 0; $i < count($data); $i++){
-            if (DB::table('jf_pinjam_approval_by_pendamping')->where('pinjam_id', $data[$i]->id)->get() < $max_approval && $data[$i]->status == 'request'){
+            if (count(DB::table('jf_pinjam_approval_by_pendamping')->where('pinjam_id', $data[$i]->id)->get()) < $max_approval && DB::table('jf_pinjam_approval_by_nazhir')->where('pinjam_id', $data[$i]->id)->get()->isEmpty() && $data[$i]->status == 'request'){
                 array_push($data_filtered, $data[$i]);
             }
         }
