@@ -951,29 +951,40 @@ class AdminController extends Controller
 
         // add log to tracking (approval admin)
         app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, Carbon::now());
-        // add log to tracking (ajuan pinjam mark as ready)
-        app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, null, Carbon::now());
-
+        
         return response()->json([
-           'status' => 200,
-           'message' => 'Data success stored'
+            'status' => 200,
+            'message' => 'Data success stored'
         ]);
     }
-
+    
     public function markAsDone(Request $request){
         if ($request->id_loan){
             $data = jf_pinjam::find($request->id_loan);
-            $data->is_complete = 1;
-            $data->update();
+            
+            if ($data){
+                $data->is_complete = 1;
+                $data->update();
+                
+                // add log to tracking (ajuan pinjam mark as ready)
+                app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, null, Carbon::now());
+    
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Data updated!'
+                ]);
 
-            return response()->json([
-                'status' => 200,
-                'message' => 'Data updated!'
-            ]);
+            } else {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Data not found!'
+                ]);
+            }
+
         } else {
             return response()->json([
-                'status' => 200,
-                'message' => 'Data update failed!'
+                'status' => 400,
+                'message' => 'No Data Selected!'
             ]);
         }
     }
