@@ -3,8 +3,8 @@
 @section('title', 'Detail Pengajuan Peminjaman')
 
 @section('content_header_title', 'Detail Pengajuan Peminjaman')
-@section('content_header_prev_link', '/anggota/pengajuanpinjam')
-@section('content_header_prev_text', 'Riwayat Pinjam')
+@section('content_header_prev_link', '/anggota/dashboard')
+@section('content_header_prev_text', 'Dashboard')
 
 @section('content_header')
     <h5 class="m-0 text-dark">Detail Pengajuan Peminjaman</h5>
