@@ -859,18 +859,19 @@ class PengajuanPinjamController extends Controller
         ->select('pa_duta_wakaf.duta_name', 'jf_pinjam.*')
         ->get();
 
-        $data = [];
+        // init empty array for item filtered
+        $data_filtered = [];
 
         // for loop to check is request still can approved by other anggota (req done approval & status request)
         for ($i = 0; $i < count($all_pinjaman); $i++){
-            if ( count(jf_pinjam_approval::where('pinjam_id', $all_pinjaman[$i]->id)->get()) < (count($amount_anggota_in_group->get()) - 1) && $all_pinjaman[$i]->status == 'request'){
-                array_push($data, $all_pinjaman[$i]);
+            if (count(jf_pinjam_approval::where('pinjam_id', $all_pinjaman[$i]->id)->get()) < (count($amount_anggota_in_group->get()) - 1) && DB::table('jf_pinjam_approval_by_pendamping')->where('pinjam_id', $all_pinjaman[$i]->id)->get()->isEmpty() && DB::table('jf_pinjam_approval_by_nazhir')->where('pinjam_id', $all_pinjaman[$i]->id)->get()->isEmpty() && $all_pinjaman[$i]->status == 'request'){
+                array_push($data_filtered, $all_pinjaman[$i]);
             }
         }
 
         // request ajax-datatable
         if ($request->ajax()) {
-            return datatables()->of($data)
+            return datatables()->of($data_filtered)
                 ->addColumn('action', function ($key) {
                     $actionBtn = "
                     <a role='button' class='detail-request-pinjam btn-success btn-sm' title='Approval' data-id=". $key->id ."' data-content='Approval'>
