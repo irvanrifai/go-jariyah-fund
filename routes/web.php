@@ -64,7 +64,7 @@ Route::group([
 
     // APPROVAL ADMIN
     Route::post('/update-approval-pinjam', [Controllers\admin\AdminController::class, 'UpdateApprovalPinjam'])->name('update-approval-pinjam');
-
+    Route::post('/approval-admin/mark-as-done', [Controllers\admin\AdminController::class, 'markAsDone'])->name('approval-admin.mark-as-done');
 
     //PENGAJUAN PINJAM
     Route::get('/approval-admin/request-pinjam', [Controllers\admin\AdminController::class, 'requestPinjam'])->name('approval-admin.request-pinjam');

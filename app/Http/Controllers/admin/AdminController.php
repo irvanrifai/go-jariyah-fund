@@ -825,17 +825,29 @@ class AdminController extends Controller
         ->join('jf_group_anggota', 'jf_pinjam.group_anggota_id', '=', 'jf_group_anggota.id')
         ->join('jf_group', 'jf_group_anggota.group_id', '=', 'jf_group.id')
         ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
+        ->where('jf_pinjam.is_complete', null)
         ->get();
         // dd($data);
         if ($request->ajax()) {
             return datatables()->of($data)
                 ->addColumn('action', function ($data) {
-                    $actionBtn = "
-                    <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
-                    <i class='fas fa-user-plus'></i></a>
-                    <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
-                    <i class='fas fa-users'></i></a>
-                    ";
+                    if ($data->status != 'request') {
+                        $actionBtn = "
+                        <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
+                        <i class='fas fa-user-plus'></i></a>
+                        <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
+                        <i class='fas fa-users'></i></a>
+                        <a role='button' class='btn-sm btn-light mark-as-done-" . $data->id . "' data-id='$data->id' style='color:grey;' title='Mark as done' onclick='markAsDone(event, $data->id)'>
+                        <i class='fas fa-check'></i></a>
+                        ";
+                    } else {
+                        $actionBtn = "
+                        <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
+                        <i class='fas fa-user-plus'></i></a>
+                        <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
+                        <i class='fas fa-users'></i></a>
+                        ";
+                    }
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -946,6 +958,24 @@ class AdminController extends Controller
            'status' => 200,
            'message' => 'Data success stored'
         ]);
+    }
+
+    public function markAsDone(Request $request){
+        if ($request->id_loan){
+            $data = jf_pinjam::find($request->id_loan);
+            $data->is_complete = 1;
+            $data->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Data updated!'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Data update failed!'
+            ]);
+        }
     }
 
     public function update(Request $request)

@@ -400,6 +400,36 @@
         });
     </script>
 
+    <script>
+        function markAsDone(e, id_loan) {
+            e.preventDefault();
+            $('.mark-as-done-'+id_loan).html('<i class="fa fa-spinner fa-spin"></i>');
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('admin.approval-admin.mark-as-done') }}",
+                data: { 
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id_loan: id_loan, 
+                },
+                dataType: 'json',
+                enctype: 'multipart/form-data',
+                success: function(response) {
+                    console.log(response);
+                    if (response.status == 400) {
+                        console.log('Error:', response);
+                        $('.mark-as-done-'+id_loan).html('<i class="fas fa-times text-danger"></i>');
+                    } else {
+                        $('.mark-as-done-'+id_loan).html('<i class="fas fa-check text-success"></i>');
+                        window.setTimeout(function() {
+                            table.draw();
+                        }, 600);
+                    }
+                }
+            });
+        }
+    </script>
+
     <div class="modal fade" id="add-pinjam-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
