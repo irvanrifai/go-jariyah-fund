@@ -330,7 +330,24 @@
             <form action="javascript:void(0)" method="POST" enctype="multipart/form-data" name="form-perijinan" id="form-perijinan">
             @csrf
             <input class="form-control" name="pinjam_id" id="pinjam_id" type="hidden">
-            <input class="form-control" name="group_anggota_id" id="group_anggota_id" type="hidden">
+            <input class="form-control" name="loan_id" id="loan_id" type="hidden">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table id="tb_approval" class="table table-hover table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Approval</th>
+                              <th>Tanggal approval</th>
+                              <th>Status</th>
+                              <th>Note</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div id="fill-table" class="col-lg-12">
                 </div>
@@ -354,6 +371,69 @@
         </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="edit-approval" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-bold" id="header-modal"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="javascript:void(0)" method="POST" id="form-edit-pinjaman">
+                @csrf
+                <input class="form-control" name="id" id="id" type="hidden">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <label for="nominal_request" class="col-form-label">Nominal (min. <span class="text-muted" id="min_pinjam"></span>) : </label>
+                            <input type="text" class="form-control num_request" name="nominal_request" id="nominal_request" required>
+                            <div id="nominal_request-validation" class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label for="tenor" class="col-form-label">Tenor (tahun) max. <span class="text-muted" id="max_tenor"></span> : </label>
+                            <input type="text" class="form-control num_max_tenor" name="tenor" id="tenor" required>
+                            <div id="tenor-validation" class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="max_pinjam" class="col-form-label">Max Pinjam : </label>
+                            <input type="text" class="form-control" name="max_pinjam" id="max_pinjam" disabled>
+                            {{-- <div id="max_pinjam-validation" class="text-danger"></div> --}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="cicilan_perbulan" class="col-form-label">Cicilan Perbulan : </label>
+                            <input type="text" value="0" class="form-control" name="cicilan_perbulan" id="cicilan_perbulan" disabled>
+                            {{-- <div id="cicilan_perbulan-validation" class="text-danger"></div> --}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="desc_request" class="col-form-label">Keterangan : </label>
+                            <input type="text" class="form-control" name="desc_request" id="desc_request" required>
+                            <div id="desc_request-validation" class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="is-valid" class="text-success text-bold"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" id="submit-btn" class="btn btn-primary submit"></button>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -448,20 +528,25 @@
     e.preventDefault();
     let $this = $(this);
     var id = $(this).data('id');
+    var loanId = null;
+
+    // console.log(id);
     $('#add-edit-pinjam-modal').modal('show');
     $.ajax({
-      type: "GET",
-      url: "{{URL::to('anggota/detail-request-pinjam')}}" + "/" + id,
-      success: function(response) {
-        // console.log(response.data.data_pinjam);
-        // console.log(response.data.data_pinjam_approval_by_anggotas);
-        if (response.status != 200) {
-            $('#header-perijinan').addClass('text-danger');
-            $('#header-perijinan').text('Data Not Found ' + response.status + ' !');
-        } else {
+        type: "GET",
+        url: "{{URL::to('anggota/detail-request-pinjam')}}" + "/" + id,
+        success: function(response) {
+            // console.log(response.data.data_pinjam.id);
+            // console.log(response.data.data_pinjam_approval_by_anggotas);
+            if (response.status != 200) {
+                $('#header-perijinan').addClass('text-danger');
+                $('#header-perijinan').text('Data Not Found ' + response.status + ' !');
+            } else {
             $('#header-perijinan').text('Perijinan Anggota');
             $('#pinjam_id').val(response.data.data_pinjam.id);
-            // $('#group_anggota_id').val(response.data.data_pinjam.group_anggota_id);
+            $('#loan_id').val(response.data.data_pinjam.id);
+            loanId = response.data.data_pinjam.id;
+            // console.log($('#loan_id').val());
             $('#duta_name').val(response.data.data_pinjam.duta_name);
             $('#nominal_ajuan').val('Rp. ' + response.data.data_pinjam.nominal_request.toLocaleString('id-ID'));
             $('#tenor').val(response.data.data_pinjam.tenor + ' bulan');
@@ -526,6 +611,8 @@
                 $('#time-request-complete').html('-');
             }
 
+            // loadApproval(response.data.data_pinjam.id);
+
             $('#is-invalid').html('');
             $('#is-valid').html('');
             $('#submit-btn').text('Add');
@@ -571,7 +658,7 @@
                     tag_status.removeChild(tag_status.firstChild);
                 } if (tag_table.hasChildNodes()) {
                     tag_table.removeChild(tag_table.firstChild);
-                } if (tag_note.hasChildNodes()){
+                } if (tag_note.hasChildNodes()) {
                     tag_note.removeChild(tag_note.firstChild);
                 } if (tag_btn_simpan_perijinan.hasChildNodes()) {
                     tag_btn_simpan_perijinan.removeChild(tag_btn_simpan_perijinan.firstChild);
@@ -583,6 +670,58 @@
 
                 tag_table.appendChild(table_perijinan);
                 table_perijinan.appendChild(table_perijinan_content);
+
+                // tb_approval.ajax.reload();
+
+                var url = "{{ route('anggota.data-pinjam-approval-by-other-anggota', ':id') }}";
+                // console.log($('#loan_id').val());
+                $.noConflict(true);
+                // const tb_approval = $('#tb_approval').DataTable({
+                //     initComplete: function() {
+                //         this.api()
+                //         var that = this;
+                //         $('input').on('keyup change clear', function() {
+                //             if (that.search() !== this.value) {
+                //                 that.search(this.value).draw();
+                //             }
+                //         });
+                //     },
+                //     processing: true,
+                //     serverSide: true,
+                //     responsive: true,
+                //     ajax: url.replace(':id', response.data.data_pinjam.id),
+                //     // ajax: "{{URL::to('anggota/data-pinjam-approval-by-other-anggota')}}" + "/" + 40,
+                //     columns: [
+                //         {
+                //             data: 'name',
+                //             name: 'name'
+                //         },
+                //         {
+                //             data: 'accepted_at',
+                //             name: 'accepted_at'
+                //         },
+                //         {
+                //             data: 'status',
+                //             name: 'status'
+                //         },
+                //         {
+                //             data: 'note',
+                //             name: 'note'
+                //         },
+                //         {
+                //             data: 'action',
+                //             name: 'action',
+                //             orderable: true,
+                //             searchable: false,
+                //             autowidth: false
+                //         },
+                //     ],
+                // });
+
+                testId();
+                // tb_approval.destroy();
+                // tb_approval.ajax.reload();
+
             }
         }
       }
@@ -590,6 +729,70 @@
   });
 
 </script>
+
+<script>
+    // function loadApproval(pinjam_id) {
+        // $(document).ready(function() {
+            var url = "{{ route('anggota.data-pinjam-approval-by-other-anggota', ':id') }}";
+            // console.log($('#loan_id').val());
+            function testId() {
+                var loanId = document.getElementById('loan_id');
+                console.log(loanId.value);
+
+                // return id
+                // const tb_approval = $('#tb_approval').DataTable({
+                const tb_approval = new DataTable('#tb_approval', {
+                    paging: false,
+                    searching: false,
+                    retrieve: true,
+                    initComplete: function() {
+                        this.api()
+                        var that = this;
+                        $('input').on('keyup change clear', function() {
+                            if (that.search() !== this.value) {
+                                that.search(this.value).draw();
+                            }
+                        });
+                    },
+                    processing: true,
+                    serverSide: true,
+                    responsive: true,
+                    ajax: url.replace(':id', loanId.value),
+                    // ajax: "{{URL::to('anggota/data-pinjam-approval-by-other-anggota')}}" + "/" + 40,
+                    columns: [
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'accepted_at',
+                            name: 'accepted_at'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status'
+                        },
+                        {
+                            data: 'note',
+                            name: 'note'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: true,
+                            searchable: false,
+                            autowidth: false
+                        },
+                    ],
+                });
+
+                tb_approval.destroy();
+            }
+            // $.noConflict(true);
+        // });
+    // }
+</script>
+
 <script>
     $(document).on('click', '#submit-btn', function(e) {
         e.preventDefault();
