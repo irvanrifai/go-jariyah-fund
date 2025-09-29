@@ -30,7 +30,7 @@ class AdminController extends Controller
 {
 
     public function index(){
-        return view('adminlte::auth\login-admin');
+        return view('adminlte::auth.login-admin');
     }
 
     public function dashboard(){
