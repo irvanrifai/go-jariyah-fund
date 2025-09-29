@@ -16,7 +16,7 @@
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "league/flysystem-aws-s3-v3": "1",
+        "league/flysystem-aws-s3-v3": "1.0.29",
         "spatie/laravel-permission": "^5.5",
         "unisharp/laravel-filemanager": "^2.2",
         "yajra/laravel-datatables-oracle": "~9.0"

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\anggota;
 
 use App\Http\Controllers\Controller;
+use App\Models\StatistikModel;
 use Illuminate\Http\Request;
 
-class SimulasiPinjamController extends Controller
+class StatistikController extends Controller
 {
     public function __construct()
     {

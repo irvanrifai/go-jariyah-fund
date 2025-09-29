@@ -2,8 +2,6 @@
 
 @section('title', 'Informasi')
 
-@section('plugins.Summernote', true)
-
 @section('content')
 
 <div class="text-center pt-4">

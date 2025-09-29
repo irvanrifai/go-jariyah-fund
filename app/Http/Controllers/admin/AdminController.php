@@ -116,18 +116,13 @@ class AdminController extends Controller
         $bayar_cicil=DB::table('jf_cicilan')->sum('nominal');
         $final=$fin+$bayar_cicil;
 
-        return view('admin.dashboard')->with(compact('totalkelompok','total_all' ,'totalgroup','final','totalajuan', 'tomu','req', 'acc', 'fin'));
-    }
-
-    public function filterdatatable()
-    {
-        return view('admin/datatable');
+        return view('admin.content.dashboard')->with(compact('totalkelompok','total_all' ,'totalgroup','final','totalajuan', 'tomu','req', 'acc', 'fin'));
     }
 
     //DUTA
-    public function duta()
+    public function dutaWakafList()
     {
-        return view('admin.duta');
+        return view('admin.content.duta-wakaf-list');
     }
 
     public function addDuta()
@@ -147,28 +142,15 @@ class AdminController extends Controller
         return view('admin.detailduta')->with(['duta' => $duta, 'id' => $id]);
     }
 
-    public function get_duta_wakaf(Request $request)
+    public function getDutaWakaf(Request $request)
     {
         $data  = duta_wakaf::get();
         if ($request->ajax()) {
             //dd($data);
             return datatables()->of($data)
-                ->addColumn('duta_wakaf', function () {
-                    $duta_wakaf = DB::table('pa_duta_wakaf')->get();
-                    return $duta_wakaf;
-                })
                 ->addColumn('action', function ($key) {
-                //     $actionBtn = "
-                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-duta/" . $key->id . "'>
-                //     <i class='fas fa-eye'></i></a>
-                //     <a role='button' class='btn-sm btn-warning' style='color:white;' title='Edit' href='/admin/edit-duta/" . $key->id . "'>
-                //     <i class='fas fa-pen-fancy'></i></a>
-                //     <a role='button' class='btn-sm btn-danger' style='color:white;' title='Hapus' href='/admin/hapusajuanpinjam/" . $key->id . "'>
-                //     <i class='fas fa-trash'></i></a>
-                // </button>";
-
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-duta/" . $key->id . "'>
+                    <a role='button' class='btn-sm btn-info detail-dutawakaf' style='color:white;' title='Detail' data-id='$key->id'>
                     <i class='fas fa-eye'></i></a>
                     ";
                     return $actionBtn;
@@ -207,9 +189,9 @@ class AdminController extends Controller
     }
 
     //NAZHIR
-    public function nazhir()
+    public function nazhirList()
     {
-        return view('admin/tampilnazhir');
+        return view('admin.content.nazhir-list');
     }
 
     public function detailNazhir($id)
@@ -219,27 +201,15 @@ class AdminController extends Controller
         return view('admin.detailnazhir')->with(['nazhir' => $nazhir, 'id' => $id]);
     }
 
-    public function get_nazhir(Request $request)
+    public function getNazhir(Request $request)
     {
         $data  = NazhirModel::get();
         if ($request->ajax()) {
             //dd($data);
             return datatables()->of($data)
-                ->addColumn('nazhir', function () {
-                    $nazhir = DB::table('pa_nazhir')->get();
-                    return $nazhir;
-                })
                 ->addColumn('action', function ($key) {
-                //     $actionBtn = "
-                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-nazhir/" . $key->id . "'>
-                //     <i class='fas fa-eye'></i></a>
-                //     <a role='button' class='btn-sm btn-warning' style='color:white;' title='Edit' href='/admin/edit-duta/" . $key->id . "'>
-                //     <i class='fas fa-pen-fancy'></i></a>
-                //     <a role='button' class='btn-sm btn-danger' style='color:white;' title='Hapus' href='/admin/hapusajuanpinjam/" . $key->id . "'>
-                //     <i class='fas fa-trash'></i></a>
-                //   ";
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-nazhir/" . $key->id . "'>
+                    <a role='button' class='btn-sm btn-info detail-nazhir' style='color:white;' title='Detail' data-id='$key->id'>
                     <i class='fas fa-eye'></i></a>
                   ";
                     return $actionBtn;
@@ -255,32 +225,20 @@ class AdminController extends Controller
     }
 
     //PROJECT
-    public function projek()
+    public function projectList()
     {
-        return view('admin/tampilprojek');
+        return view('admin.content.project-list');
     }
 
-    public function get_projek(Request $request)
+    public function getProject(Request $request)
     {
         $data  = ProjectModel::get();
         if ($request->ajax()) {
             //dd($data);
             return datatables()->of($data)
-                ->addColumn('projek', function () {
-                    $projek = DB::table('pa_project')->get();
-                    return $projek;
-                })
                 ->addColumn('action', function ($key) {
-                //     $actionBtn = "
-                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-project/" . $key->id . "'>
-                //     <i class='fas fa-eye'></i></a>
-                //     <a role='button' class='btn-sm btn-warning' style='color:white;' title='Edit' href='/admin/edit-duta/" . $key->id . "'>
-                //     <i class='fas fa-pen-fancy'></i></a>
-                //     <a role='button' class='btn-sm btn-danger' style='color:white;' title='Hapus' href='/admin/hapusajuanpinjam/" . $key->id . "'>
-                //     <i class='fas fa-trash'></i></a>
-                // ";
                     $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detail-project/" . $key->id . "'>
+                    <a role='button' class='btn-sm btn-info detail-project' style='color:white;' title='Detail' data-id='$key->id'>
                     <i class='fas fa-eye'></i></a>
                 ";
                     return $actionBtn;
@@ -300,7 +258,7 @@ class AdminController extends Controller
     //PENDAMPING
     public function getPendamping()
     {
-        return view('admin/pendamping');
+        return view('admin.content.pendamping-list');
     }
 
     public function dataPendamping(Request $request)
@@ -391,7 +349,7 @@ class AdminController extends Controller
     //SETTING
     public function getSetting()
     {
-        return view('admin/tampilsetting');
+        return view('admin.content.setting-list');
     }
 
     public function dataSetting(Request $request)
@@ -583,7 +541,7 @@ class AdminController extends Controller
     //GROUP
     public function group()
     {
-        return view('admin/tampilangroup');
+        return view('admin.content.group-list');
     }
 
     public function dataGroup(Request $request)
@@ -698,7 +656,7 @@ class AdminController extends Controller
 
         $amount_anggota_in_group = count(DB::table('jf_group_anggota')->where('group_id', $id)->get());
 
-        return view('admin.detailGroup')->with(['group' => $group, 'amount_anggota' => $amount_anggota_in_group]);
+        return view('admin.content.group-detail')->with(['group' => $group, 'amount_anggota' => $amount_anggota_in_group]);
     }
 
     public function addAnggotaToGroup(Request $request)
@@ -851,12 +809,12 @@ class AdminController extends Controller
     }
 
     //PENGAJUAN PINJAM
-    public function tampilpengajuanpinjam()
+    public function requestPinjam()
     {
-        return view('admin/pengajuanpinjam');
+        return view('admin.content.approval-admin');
     }
 
-    public function pengajuanpinjam(Request $request)
+    public function dataRequestPinjam(Request $request)
     {
         $data = DB::table('jf_pinjam')->select(
             'jf_pinjam.*',
@@ -867,17 +825,29 @@ class AdminController extends Controller
         ->join('jf_group_anggota', 'jf_pinjam.group_anggota_id', '=', 'jf_group_anggota.id')
         ->join('jf_group', 'jf_group_anggota.group_id', '=', 'jf_group.id')
         ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
+        ->where('jf_pinjam.is_complete', null)
         ->get();
         // dd($data);
         if ($request->ajax()) {
             return datatables()->of($data)
                 ->addColumn('action', function ($data) {
-                    $actionBtn = "
-                    <a role='button' class='btn-sm btn-info detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
-                    <i class='fas fa-user-plus'></i></a>
-                    <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
-                    <i class='fas fa-users'></i></a>
-                    ";
+                    if ($data->status != 'request') {
+                        $actionBtn = "
+                        <a role='button' class='btn-sm btn-success detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
+                        <i class='fas fa-check-circle'></i></a>
+                        <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
+                        <i class='fas fa-users'></i></a>
+                        <a role='button' class='btn-sm btn-light mark-as-done-" . $data->id . "' data-id='$data->id' style='color:grey;' title='Mark as done' onclick='markAsDone(event, $data->id)'>
+                        <i class='fas fa-check'></i></a>
+                        ";
+                    } else {
+                        $actionBtn = "
+                        <a role='button' class='btn-sm btn-success detail-ajuan' data-id='$data->id' style='color:white;' title='Perijinan Anda'>
+                        <i class='fas fa-check-circle'></i></a>
+                        <a role='button' class='btn-sm btn-primary' style='color:white;' title='Semua Perijinan' href='/admin/detail-request-pinjam/" . $data->id . "'>
+                        <i class='fas fa-users'></i></a>
+                        ";
+                    }
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -981,13 +951,42 @@ class AdminController extends Controller
 
         // add log to tracking (approval admin)
         app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, Carbon::now());
-        // add log to tracking (ajuan pinjam mark as ready)
-        app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, null, Carbon::now());
 
         return response()->json([
-           'status' => 200,
-           'message' => 'Data success stored'
+            'status' => 200,
+            'message' => 'Data success stored'
         ]);
+    }
+
+    public function markAsDone(Request $request){
+        if ($request->id_loan){
+            $data = jf_pinjam::find($request->id_loan);
+
+            if ($data){
+                $data->is_complete = 1;
+                $data->update();
+
+                // add log to tracking (ajuan pinjam mark as ready)
+                app('App\Http\Controllers\TrackingPinjamanAnggotaController')->addUpdateTrackingPinjam($request->pinjam_id, null, null, null, null, null, Carbon::now());
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Data updated!'
+                ]);
+
+            } else {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Data not found!'
+                ]);
+            }
+
+        } else {
+            return response()->json([
+                'status' => 400,
+                'message' => 'No Data Selected!'
+            ]);
+        }
     }
 
     public function update(Request $request)
@@ -1037,9 +1036,9 @@ class AdminController extends Controller
     }
 
     //CICILAN
-    public function tampilcicilan()
+    public function requestCicilan()
     {
-        return view('admin/tampilcicilan');
+        return view('admin.content.cicilan');
     }
 
     public function dataCicilan(Request $request)
@@ -1186,13 +1185,13 @@ class AdminController extends Controller
     }
 
     //dana masuk
-    public function tampilandanamasuk()
+    public function fundIncoming()
     {
-        return view('admin/tampilandanamasuk');
+        return view('admin.content.incoming-fund');
     }
 
     //dana terpakai
-    public function tampilandanaterpakai()
+    public function fundUsed()
     {
         return view('template.development-admin');
     }
@@ -1379,7 +1378,7 @@ class AdminController extends Controller
         return view('admin/lihatlistaproval')->with(['aprove' => $aprove, 'id' => $id]);
     }
 
-    public function showmudharabah(Request $request)
+    public function dataDanaMasuk(Request $request)
     {
         $data = DB::table('jf_pinjam')->select(
             'pa_duta_wakaf.duta_name',
@@ -1395,167 +1394,20 @@ class AdminController extends Controller
 
         if ($request->ajax()) {
             return datatables()->of($data)
-                ->addColumn('action', function ($key) {
-                    $actionBtn = "
-                    <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detailcicilan/" . $key->id . "'>
-                    <i class='fas fa-eye'></i></a>
-                    <a role='button' class='btn-sm btn-warning edit' data-id='$key->id' style='color:white;' title='Edit'>
-                    <i class='fas fa-pen-fancy'></i></a>
-                    <a role='button' class='btn-sm btn-danger hapus' data-id='$key->id' style='color:white;' title='Hapus'>
-                    <i class='fas fa-trash'></i></a>
-                ";
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
+                // ->addColumn('action', function ($key) {
+                //     $actionBtn = "
+                //     <a role='button' class='btn-sm btn-info' style='color:white;' title='Detail' href='/admin/detailcicilan/" . $key->id . "'>
+                //     <i class='fas fa-eye'></i></a>
+                //     <a role='button' class='btn-sm btn-warning edit' data-id='$key->id' style='color:white;' title='Edit'>
+                //     <i class='fas fa-pen-fancy'></i></a>
+                //     <a role='button' class='btn-sm btn-danger hapus' data-id='$key->id' style='color:white;' title='Hapus'>
+                //     <i class='fas fa-trash'></i></a>
+                // ";
+                //     return $actionBtn;
+                // })
+                // ->rawColumns(['action'])
                 ->toJson();
         }
-    }
-
-    public function filterajuan(Request $request)
-    {
-        //dd($request->cari);
-        $cari = $request->input('cari');
-        $data = DB::table('pa_duta_wakaf')
-            ->where('duta_name', 'like', "%" . $cari . "%")->paginate(5);
-        return view('admin.duta', compact('data'));
-    }
-
-    public function filter_std()
-    {
-        $model = new CicilanModel();
-        $rows = $model->fetch_std();
-        return ResponseFormatter::success($rows, 'Data Didapatkan');
-    }
-
-    public function filter_result()
-    {
-        $model = new CicilanModel();
-        $rows = $model->fetch_result();
-        return ResponseFormatter::success($rows, 'Data Didapatkan');
-    }
-
-    public function fetch()
-    {
-        $model = new CicilanModel();
-        if (isset($_POST['std']) && isset($_POST['res']) && !empty($_POST['std']) && !empty($_POST['res'])) {
-            $std = $_POST['std'];
-            $res = $_POST['res'];
-            $rows = $model->fetch_filter($std, $res);
-        } elseif (isset($_POST['std']) && empty($_POST['res'])) {
-            $std = $_POST['std'];
-            $rows = $model->fetch_std_filter($std);
-        } elseif (empty($_POST['std']) && isset($_POST['res'])) {
-            $res = $_POST['res'];
-            $rows = $model->fetch_res_filter($res);
-        } else {
-            $rows = $model->fetch();
-        }
-        //dd($data);
-        return ResponseFormatter::success($rows, 'Data Didapatkan');
-    }
-
-    public function filterdata(Request $request)
-    {
-        $peminjam = $request->input('duta_name');
-        $id = DB::table('jf_pinjam')->select(
-            'jf_pinjam.id as pinjam_id',
-        );
-        $id = $id
-            ->join('jf_group_anggota', 'jf_pinjam.group_anggota_id', '=', 'jf_group_anggota.id')
-            ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
-            ->where('pa_duta_wakaf.duta_name', '=', $peminjam)->get();
-        $charData = "";
-        foreach ($id as $list) {
-            $charData .= $list->pinjam_id;
-        }
-        $arr = rtrim($charData);
-
-        $nominal =  $request->input('nominal');
-        $data = DB::table('jf_cicilan')->select(
-            'jf_cicilan.*',
-            'pa_duta_wakaf.duta_name',
-            'jf_pinjam.desc_request'
-        );
-        $data = $data
-            ->join('jf_pinjam', 'jf_cicilan.pinjam_id', '=', 'jf_pinjam.id')
-            ->join('jf_group_anggota', 'jf_pinjam.group_anggota_id', '=', 'jf_group_anggota.id')
-            ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
-            ->where('pinjam_id', 'like', "%" . $charData . "%")
-            ->where('nominal', 'like', "%" . $nominal . "%")
-            ->get();
-        return view('admin.filtercicilan', compact('data'));
-    }
-
-    public function filterlistanggota()
-    {
-        $model = new group_anggota();
-        $rows = $model->filter_name();
-        return ResponseFormatter::success($rows, 'Data Didapatkan');
-    }
-
-    public function getlistanggota(Request $request)
-    {
-        $info = $request->input('kelompok');
-        $data = DB::table('jf_group_anggota')->select(
-            'pa_duta_wakaf.duta_name as duta_name',
-            'loc_districts.name as namaKecamatan',
-            'jf_group_anggota.*'
-        )->where('jf_group_anggota.name', 'like', "%" . $info . "%");
-        $data = $data
-            ->join('jf_group', 'jf_group_anggota.group_id', '=', 'jf_group.id')
-            ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
-            ->join('loc_districts', 'jf_group.district_id', '=', 'loc_districts.id')
-            ->get();
-        //dd($data);
-        return view('admin.filterlistanggota', compact('data'));
-    }
-
-    public function filter_std_peminjam()
-    {
-        $model = new jf_pinjam();
-        $rows = $model->fetch_std_peminjam();
-        return ResponseFormatter::success($rows, 'Data Didapatkan');
-    }
-
-    public function filterajuanajuan(Request $request)
-    {
-        $peminjam = $request->input('peminjam');
-        //dd($peminjam);
-        $kelompok = $request->input('kelompok');
-        //dd($kelompok);
-        $status = $request->input('status');
-        //dd($status);
-
-        $id = DB::table('jf_group_anggota')->select(
-            'jf_group_anggota.id as jf_group_anggota_id'
-        )->where('jf_group_anggota.name', '=', $kelompok);
-        $id = $id
-            ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
-            ->where('pa_duta_wakaf.duta_name', '=', $peminjam)
-            ->distinct()
-            ->get();
-        $charData = "";
-        foreach ($id as $list) {
-            $charData .= $list->jf_group_anggota_id;
-        }
-        $arr = rtrim($charData);
-        //dd($charData);
-
-        $data = DB::table('jf_pinjam')->select(
-            'jf_pinjam.*',
-            'jf_pinjam.created_at as tgl',
-            'jf_pinjam_approval_by_nazhir.created_at as accepted_hji_at',
-            'jf_group_anggota.name',
-            'pa_duta_wakaf.duta_name'
-        )->where('jf_pinjam.status', '=', $status)
-        ->join('jf_pinjam_approval_by_nazhir', 'jf_pinjam.id', '=', 'jf_pinjam_approval_by_nazhir.pinjam_id')
-        ->join('jf_group_anggota', 'jf_pinjam.group_anggota_id', '=', 'jf_group_anggota.id')
-        ->where('group_anggota_id', 'like', "%" . $charData . "%")
-        ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
-        ->get();
-        //dd($data);
-
-        return view('admin.filterajuan', compact('data'));
     }
 
     public function detailRequestPinjam($id)
@@ -1628,6 +1480,94 @@ class AdminController extends Controller
         // }
         // $data->is_show_cicilan = $is_show_cicilan;
 
-        return view('admin/detail-request-pinjam')->with(['data' => $data]);
+        return view('admin.content.detail-request-pinjam')->with(['data' => $data]);
+    }
+
+    public function listDetailApprovalAnggota(Request $request, $id){
+        $data = DB::table('jf_pinjam_approval')
+        ->where('jf_pinjam_approval.pinjam_id', $id)
+        ->join('jf_group_anggota', 'jf_pinjam_approval.group_anggota_id', '=', 'jf_group_anggota.id')
+        ->join('pa_duta_wakaf', 'jf_group_anggota.duta_wakaf_id', '=', 'pa_duta_wakaf.id')
+        ->select('pa_duta_wakaf.duta_name as name', 'jf_pinjam_approval.accepted_at', 'jf_pinjam_approval.status', 'jf_pinjam_approval.note')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function listDetailApprovalPendamping(Request $request, $id){
+        $data = DB::table('jf_pinjam_approval_by_pendamping')
+        ->where('jf_pinjam_approval_by_pendamping.pinjam_id', $id)
+        ->join('jf_pendamping', 'jf_pinjam_approval_by_pendamping.pendamping_id', '=', 'jf_pendamping.id')
+        ->select('jf_pendamping.name', 'jf_pinjam_approval_by_pendamping.accepted_at', 'jf_pinjam_approval_by_pendamping.status', 'jf_pinjam_approval_by_pendamping.note')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function listDetailApprovalNazhir(Request $request, $id){
+        $data = DB::table('jf_pinjam_approval_by_nazhir')
+        ->where('jf_pinjam_approval_by_nazhir.pinjam_id', $id)
+        ->join('pa_nazhir', 'jf_pinjam_approval_by_nazhir.nazhir_id', '=', 'pa_nazhir.id')
+        ->select('pa_nazhir.nazhir_name as name', 'jf_pinjam_approval_by_nazhir.accepted_at', 'jf_pinjam_approval_by_nazhir.status', 'jf_pinjam_approval_by_nazhir.note')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function listDetailApprovalAdmin(Request $request, $id){
+        $data = DB::table('jf_pinjam')
+        ->where('jf_pinjam.id', $id)
+        ->where('jf_pinjam.accepted_at', '!=', null)
+        ->select('jf_pinjam.nominal_accepted', 'jf_pinjam.accepted_at', 'jf_pinjam.status')
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+            return datatables()->of($data)->toJson();
+        }
+    }
+
+    public function dataListCicilan(Request $request, $id){
+        $data = DB::table('jf_cicilan')
+        ->where('jf_cicilan.pinjam_id', $id)
+        ->select(
+            'jf_cicilan.id',
+            'jf_cicilan.nominal',
+            'jf_cicilan.note_internal as desc_cicilan',
+            'jf_cicilan.created_at',
+            'jf_cicilan.is_valid as status',
+            'jf_cicilan.note_admin',
+            'jf_cicilan.approval_at'
+        )
+        ->get();
+
+        // dd($data);
+
+        if ($request->ajax()) {
+
+            return datatables()->of($data)
+                ->addColumn('action', function ($key) {
+                    $actionBtn = "
+                    <a role='button' class='btn-sm btn-info detail-cicilan' title='Detail' data-id='$key->id' style='color:white;'>
+                    <i class='fas fa-eye'></i></a>
+                    </button>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->toJson();
+        }
     }
 }

@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
-use App\Http\Controllers\StatistikController;
-use Symfony\Component\HttpFoundation\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 */
 
 // routing for start session user or admin
-Route::get('/', [Controllers\DashboardController::class, 'loginUser'])->middleware('guest')->name('/');
+Route::get('/', [Controllers\anggota\DashboardController::class, 'loginUser'])->middleware('guest')->name('/');
 Route::get('/admin', [Controllers\admin\AdminController::class, 'index'])->middleware('guest')->name('admin');
+
 // attempt login
 Route::post('/user-login', [Controllers\Auth\LoginController::class, 'loginUser'])->middleware('guest')->name('user-login');
 Route::post('/admin-login', [Controllers\Auth\LoginController::class, 'loginAdmin'])->middleware('guest')->name('admin-login');
@@ -27,90 +26,18 @@ Route::post('/admin-login', [Controllers\Auth\LoginController::class, 'loginAdmi
 Route::post('/user-logout', [Controllers\Auth\LoginController::class, 'logoutUser'])->name('user-logout');
 Route::post('/admin-logout', [Controllers\Auth\LoginController::class, 'logoutAdmin'])->name('admin-logout');
 
-Route::get('/backoffice', function(){
-    return response("Whooopsss!", 404);
-});
-
-Route::get('/account/password/reset', function(){
-    return response("Whooopsss!", 404);
-});
-
-Route::get('/account/password/email', function(){
-    return response("Whooopsss!", 404);
-});
-
-// Route::get('/', [Controllers\HomeController::class, 'home'])->name('public.homepage');
-Route::get('/artikel', [Controllers\PostsController::class, 'index_posts'])->name('public.indexPosts');
-Route::get('/artikel/{slug?}', [Controllers\PostsController::class, 'get_post_by_slug']);
-Route::get('/kategori/{slug?}', [Controllers\PostsController::class, 'categoryIndex']);
-Route::get('/p/{slug?}', [Controllers\PagesController::class, 'get_page_by_slug']);
-Route::get('/hubungi-kami', [Controllers\WebsiteSettingsController::class, 'contact'])->name('public.contactUs');
-
-// Saran
-Route::get('/saran', [Controllers\AdviceController::class, 'show_create_form'])->name('saran.form');
-Route::post('public/tambah_saran', [Controllers\AdviceController::class, 'tambah_saran'])->name('tambah_saran');
-Route::get('/galeri', [Controllers\GalleryController::class, 'index_public'])->name('public.gallery');
-// Route::post('login', 'Auth\LoginController@login')->name('login');
-Route::get('logout', [Controllers\admin\LoginAdminController::class, 'logout'])->name('logout');
-
-Route::get('/datalogin', [Controllers\anggota\PengajuanPinjamController::class, 'datalogin'])->name('datalogin');
-
-// Route::get('/monitoring/{dari}/waktu/{ke}', 'App\Http\Controllers\MonitoringController@getwaktu');
-Route::get('editaprove/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'editaprove'])->name('editaprove');
-Route::group([
-    'prefix' => 'admin',
-    'as' => 'admin.'
-], function () {
-    //SHOW DETAIL
-    Route::get('/detail-duta/{id}', [Controllers\admin\AdminController::class, 'detailDuta'])->name('detail-duta');
-    Route::get('/detail-nazhir/{id}', [Controllers\admin\AdminController::class, 'detailNazhir'])->name('detail-nazhir');
-    Route::get('/detail-project/{id}', [Controllers\admin\AdminController::class, 'detailProject'])->name('detail-project');
-
-    Route::get('/detail-list-anggota/{id}', [Controllers\admin\AdminController::class, 'detailListAnggota'])->name('detail-list-anggota');
-    Route::get('/edit-list-anggota/{id}', [Controllers\admin\AdminController::class, 'editListAnggota'])->name('edit-list-anggota');
-    Route::get('update-list-anggota', [Controllers\admin\AdminController::class, 'updateListAnggota'])->name('update-list-anggota');
-    Route::get('/hapus-list-anggota/{id}', [Controllers\admin\AdminController::class, 'deleteListAnggota'])->name('hapus-list-anggota');
-    Route::get('/detail-request-pinjam-anggota/{id}', [Controllers\admin\AdminController::class, 'detailRequestPinjamAnggota'])->name('detail-request-pinjam-anggota');
-
-    Route::get('/detailpengajuanpinjam/{id}', [Controllers\admin\AdminController::class, 'detailpengajuanpinjam'])->name('detailpengajuanpinjam');
-    Route::get('/edit-pengajuanpinjam/{id}', [Controllers\admin\AdminController::class, 'editpengajuanpinjam'])->name('edit-pengajuanpinjam');
-    Route::get('/update-pengajuanpinjam', [Controllers\admin\AdminController::class, 'update'])->name('update-pengajuanpinjam');
-    Route::get('/hapuspengajuanpinjam/{id}', [Controllers\admin\AdminController::class, 'deletepengajuanpinjam'])->name('hapuspengajuanpinjam');
-
-    Route::get('/detailcicilan/{id}', [Controllers\admin\AdminController::class, 'detailcicilan'])->name('detailcicilan');
-    Route::get('/editcicilan/{id}', [Controllers\admin\AdminController::class, 'editcicilan'])->name('editcicilan');
-    Route::get('/hapuscicil/{id}', [Controllers\admin\AdminController::class, 'hapuscicil'])->name('hapuscicil');
-    Route::post('/updatecicilan', [Controllers\admin\AdminController::class, 'updatecicil'])->name('updatecicilan');
-    Route::get('/filter-std', [Controllers\admin\AdminController::class, 'filter_std'])->name('filter-std');
-    Route::get('/filter-result', [Controllers\admin\AdminController::class, 'filter_result'])->name('filter-result');
-    Route::get('/fetch/fetch', [Controllers\admin\AdminController::class, 'fetch'])->name('fetch/fetch');
-    Route::get('/filterdata/filterdata', [Controllers\admin\AdminController::class, 'filterdata'])->name('filterdata/filterdata');
-    Route::get('/filterlistanggota', [Controllers\admin\AdminController::class, 'filterlistanggota'])->name('filterlistanggota');
-    Route::get('/filterlistanggota/filterlistanggota', [Controllers\admin\AdminController::class, 'getlistanggota'])->name('filterlistanggota/filterlistanggota');
-
-    Route::get('/filter-std-peminjam', [Controllers\admin\AdminController::class, 'filter_std_peminjam'])->name('filter-std-peminjam');
-    Route::get('/filterajuan/filterajuan', [Controllers\admin\AdminController::class, 'filterajuanajuan'])->name('filterajuan/filterajuan');
-
-    Route::get('/get-prov/{duta}', [Controllers\admin\AdminController::class, 'getProvinsi'])->name('get-prov');
-});
-
 Route::group([
     'prefix' => 'admin',
     'as'    => 'admin.',
     'middleware' => ['auth:admin']
 ], function () {
-    Route::get('filterdatatable', [Controllers\admin\AdminController::class, 'filterdatatable'])->name('filterdatatable');
     Route::get('dashboard', [Controllers\admin\AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('detail-request-pinjam/{id}', [Controllers\admin\AdminController::class, 'detailRequestPinjam'])->name('detail-request-pinjam');
 
     //DUTA
-    Route::get('tampilandashboard', [Controllers\admin\DashboardAdminController::class, 'index'])->name('tampilandashboard');
-    Route::get('tampilandutawakaf', [Controllers\admin\AdminController::class, 'duta'])->name('tampilandutawakaf');
-    Route::get('datadutawakaf/dataduta', [Controllers\admin\AdminController::class, 'get_duta_wakaf'])->name('datadutawakaf.dataduta');
+    Route::get('/duta-wakaf-list', [Controllers\admin\AdminController::class, 'dutaWakafList'])->name('duta-wakaf-list');
+    Route::get('/data-dutawakaf', [Controllers\admin\AdminController::class, 'getDutaWakaf'])->name('data-dutawakaf');
     Route::get('totalduta', [Controllers\admin\AdminController::class, 'totalduta'])->name('totalduta');
-    // Route::get('add-duta', [Controllers\admin\AdminController::class, 'addDuta'])->name('add-duta');
-    // Route::get('edit-duta/{id}', [Controllers\admin\AdminController::class, 'editDuta'])->name('edit-duta');
-    // Route::post('tambah-duta', [Controllers\admin\AdminController::class, 'store'])->name('tambah-duta');
     Route::get('select2-duta', [Controllers\admin\AdminController::class, 'select2dutaname'])->name('select2-duta');
     Route::get('select2-village', [Controllers\admin\AdminController::class, 'select2village'])->name('select2-village');
     Route::get('select2-kec', [Controllers\admin\AdminController::class, 'select2kec'])->name('select2-kec');
@@ -137,18 +64,15 @@ Route::group([
 
     // APPROVAL ADMIN
     Route::post('/update-approval-pinjam', [Controllers\admin\AdminController::class, 'UpdateApprovalPinjam'])->name('update-approval-pinjam');
-
+    Route::post('/approval-admin/mark-as-done', [Controllers\admin\AdminController::class, 'markAsDone'])->name('approval-admin.mark-as-done');
 
     //PENGAJUAN PINJAM
-    Route::get('tampilpengajuanpinjam', [Controllers\admin\AdminController::class, 'tampilpengajuanpinjam'])->name('tampilpengajuanpinjam');
-    Route::get('/pengajuanpinjam/pengajuanpinjam', [Controllers\admin\AdminController::class, 'pengajuanpinjam'])->name('pengajuanpinjam.pengajuanpinjam');
-    Route::get('/lihatlistapproval/{id}', [Controllers\admin\AdminController::class, 'lihatlistaproval'])->name('lihatlistapproval');
+    Route::get('/approval-admin/request-pinjam', [Controllers\admin\AdminController::class, 'requestPinjam'])->name('approval-admin.request-pinjam');
+    Route::get('/approval-admin/data-request-pinjam', [Controllers\admin\AdminController::class, 'dataRequestPinjam'])->name('approval-admin.data-request-pinjam');
 
     //CICILAN
-    Route::get('tampilcicilan', [Controllers\admin\AdminController::class, 'tampilcicilan'])->name('tampilcicilan');
+    Route::get('/approval-admin/request-cicilan', [Controllers\admin\AdminController::class, 'requestCicilan'])->name('approval-admin.request-cicilan');
     Route::get('/data-cicilan', [Controllers\admin\AdminController::class, 'dataCicilan'])->name('data-cicilan');
-    Route::get('add-cicilan', [Controllers\admin\AdminController::class, 'addcicil'])->name('add-cicilan');
-    Route::post('/tambahcicilan', [Controllers\admin\AdminController::class, 'createCicil'])->name('tambahcicilan');
     Route::get('/detail-cicilan/{id}', [Controllers\admin\AdminController::class, 'detailCicilan'])->name('detail-cicilan');
 
     // TRACKING
@@ -161,55 +85,82 @@ Route::group([
     Route::get('check-is-step-six-complete/{id}', [Controllers\TrackingPinjamanAnggotaController::class, 'checkIsStepSixComplete'])->name('check-is-step-six-complete');
 
     //DANA MASUK
-    Route::get('tampilandanamasuk', [Controllers\admin\AdminController::class, 'tampilandanamasuk'])->name('tampilandanamasuk');
-    Route::get('/mudharabah/mudharabah', [Controllers\admin\AdminController::class, 'showmudharabah'])->name('mudharabah.mudharabah');
+    Route::get('/fund/incoming', [Controllers\admin\AdminController::class, 'fundIncoming'])->name('fund.incoming');
+    Route::get('/data-dana-masuk', [Controllers\admin\AdminController::class, 'dataDanaMasuk'])->name('data-dana-masuk');
 
     //DANA TERPAKAI
-    Route::get('tampilandanaterpakai', [Controllers\admin\AdminController::class, 'tampilandanaterpakai'])->name('tampilandanaterpakai');
+    Route::get('/fund/used', [Controllers\admin\AdminController::class, 'fundUsed'])->name('fund-used');
 
     //LIST ANGGOTA
     Route::get('tampilanlistanggota', [Controllers\admin\AdminController::class, 'listAnggota'])->name('tampilanlistanggota');
     Route::get('data-list-anggota', [Controllers\admin\AdminController::class, 'dataListAnggota'])->name('data-list-anggota');
     Route::get('add-list-anggota', [Controllers\admin\AdminController::class, 'addListAnggota'])->name('add-list-anggota');
-    // Route::get('add-anggota-to-group', [Controllers\admin\AdminController::class, 'addAnggotaToGroup'])->name('add-anggota-to-group');
 
     //GROUP
-    Route::get('group', [Controllers\admin\AdminController::class, 'group'])->name('group');
-    Route::get('data-group', [Controllers\admin\AdminController::class, 'dataGroup'])->name('data-group');
-    Route::get('add-group', [Controllers\admin\AdminController::class, 'addGroup'])->name('add-group');
-    Route::post('create-group', [Controllers\admin\AdminController::class, 'createGroup'])->name('create-group');
+    Route::get('/group', [Controllers\admin\AdminController::class, 'group'])->name('group');
+    Route::get('/data-group', [Controllers\admin\AdminController::class, 'dataGroup'])->name('data-group');
+    Route::get('/add-group', [Controllers\admin\AdminController::class, 'addGroup'])->name('add-group');
+    Route::post('/create-group', [Controllers\admin\AdminController::class, 'createGroup'])->name('create-group');
     Route::get('/hapus-group/{id}', [Controllers\admin\AdminController::class, 'deleteGroup'])->name('hapus-group');
     Route::get('/detail-group/{id}', [Controllers\admin\AdminController::class, 'detailGroup'])->name('detail-group');
     Route::get('/edit-group/{id}', [Controllers\admin\AdminController::class, 'editGroup'])->name('edit-group');
-    Route::post('update-group', [Controllers\admin\AdminController::class, 'updateGroup'])->name('update-group');
-    Route::get('data-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'dataAnggotaInGroup'])->name('data-anggota-in-group');
-    Route::post('add-anggota-to-group', [Controllers\admin\AdminController::class, 'addAnggotaToGroup'])->name('add-anggota-to-group');
-    Route::get('edit-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'editAnggotaInGroup'])->name('edit-anggota-in-group');
-    Route::post('update-anggota-in-group', [Controllers\admin\AdminController::class, 'updateAnggotaInGroup'])->name('update-anggota-in-group');
-    Route::post('remove-anggota-from-group/{id}', [Controllers\admin\AdminController::class, 'removeAnggotaFromGroup'])->name('remove-anggota-from-group');
+    Route::post('/update-group', [Controllers\admin\AdminController::class, 'updateGroup'])->name('update-group');
+    Route::get('/data-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'dataAnggotaInGroup'])->name('data-anggota-in-group');
+    Route::post('/add-anggota-to-group', [Controllers\admin\AdminController::class, 'addAnggotaToGroup'])->name('add-anggota-to-group');
+    Route::get('/edit-anggota-in-group/{id}', [Controllers\admin\AdminController::class, 'editAnggotaInGroup'])->name('edit-anggota-in-group');
+    Route::post('/update-anggota-in-group', [Controllers\admin\AdminController::class, 'updateAnggotaInGroup'])->name('update-anggota-in-group');
+    Route::post('/remove-anggota-from-group/{id}', [Controllers\admin\AdminController::class, 'removeAnggotaFromGroup'])->name('remove-anggota-from-group');
 
     //NAZHIR
-    Route::get('tampilan-nazhir', [Controllers\admin\AdminController::class, 'nazhir'])->name('tampilan-nazhir');
-    Route::get('datanazhir/datanazhir', [Controllers\admin\AdminController::class, 'get_nazhir'])->name('datanazhir.datanazhir');
-    // Route::get('add-nazhir', [Controllers\admin\AdminController::class, 'addNazhir'])->name('add-nazhir');
+    Route::get('/nazhir-list', [Controllers\admin\AdminController::class, 'nazhirList'])->name('nazhir-list');
+    Route::get('data-nazhir', [Controllers\admin\AdminController::class, 'getNazhir'])->name('data-nazhir');
 
     //PROJEK
-    Route::get('tampilan-projek', [Controllers\admin\AdminController::class, 'projek'])->name('tampilan-projek');
-    Route::get('dataprojek/dataprojek', [Controllers\admin\AdminController::class, 'get_projek'])->name('dataprojek.dataprojek');
+    Route::get('project-list', [Controllers\admin\AdminController::class, 'projectList'])->name('project-list');
+    Route::get('data-project', [Controllers\admin\AdminController::class, 'getProject'])->name('data-project');
 
     // MENU PENDAMPING
-    Route::get('pendamping', [Controllers\admin\AdminController::class, 'getPendamping'])->name('pendamping');
-    Route::get('data-pendamping', [Controllers\admin\AdminController::class, 'dataPendamping'])->name('data-pendamping');
-    Route::post('create-update-pendamping', [Controllers\admin\AdminController::class, 'createUpdatePendamping'])->name('create-update-pendamping');
-    Route::get('edit-pendamping/{id}', [Controllers\admin\AdminController::class, 'editPendamping'])->name('edit-pendamping');
-    Route::get('hapus-pendamping/{id}', [Controllers\admin\AdminController::class, 'deletePendamping'])->name('hapus-pendamping');
+    Route::get('/pendamping-list', [Controllers\admin\AdminController::class, 'getPendamping'])->name('pendamping-list');
+    Route::get('/data-pendamping', [Controllers\admin\AdminController::class, 'dataPendamping'])->name('data-pendamping');
+    Route::post('/create-update-pendamping', [Controllers\admin\AdminController::class, 'createUpdatePendamping'])->name('create-update-pendamping');
+    Route::get('/edit-pendamping/{id}', [Controllers\admin\AdminController::class, 'editPendamping'])->name('edit-pendamping');
+    Route::get('/hapus-pendamping/{id}', [Controllers\admin\AdminController::class, 'deletePendamping'])->name('hapus-pendamping');
 
     //SETTING
-    Route::get('setting', [Controllers\admin\AdminController::class, 'getSetting'])->name('setting');
-    Route::get('data-setting', [Controllers\admin\AdminController::class, 'dataSetting'])->name('data-setting');
-    Route::post('create-update-setting', [Controllers\admin\AdminController::class, 'createUpdateSetting'])->name('create-update-setting');
-    Route::get('edit-setting/{id}', [Controllers\admin\AdminController::class, 'editSetting'])->name('edit-setting');
-    Route::get('hapus-setting/{id}', [Controllers\admin\AdminController::class, 'deleteSetting'])->name('hapus-setting');
+    Route::get('/setting', [Controllers\admin\AdminController::class, 'getSetting'])->name('setting');
+    Route::get('/data-setting', [Controllers\admin\AdminController::class, 'dataSetting'])->name('data-setting');
+    Route::post('/create-update-setting', [Controllers\admin\AdminController::class, 'createUpdateSetting'])->name('create-update-setting');
+    Route::get('/edit-setting/{id}', [Controllers\admin\AdminController::class, 'editSetting'])->name('edit-setting');
+    Route::get('/hapus-setting/{id}', [Controllers\admin\AdminController::class, 'deleteSetting'])->name('hapus-setting');
+
+    //SHOW DETAIL
+    Route::get('/detail-duta/{id}', [Controllers\admin\AdminController::class, 'detailDuta'])->name('detail-duta');
+    Route::get('/detail-nazhir/{id}', [Controllers\admin\AdminController::class, 'detailNazhir'])->name('detail-nazhir');
+    Route::get('/detail-project/{id}', [Controllers\admin\AdminController::class, 'detailProject'])->name('detail-project');
+
+    Route::get('/detail-list-anggota/{id}', [Controllers\admin\AdminController::class, 'detailListAnggota'])->name('detail-list-anggota');
+    Route::get('/edit-list-anggota/{id}', [Controllers\admin\AdminController::class, 'editListAnggota'])->name('edit-list-anggota');
+    Route::get('update-list-anggota', [Controllers\admin\AdminController::class, 'updateListAnggota'])->name('update-list-anggota');
+    Route::get('/hapus-list-anggota/{id}', [Controllers\admin\AdminController::class, 'deleteListAnggota'])->name('hapus-list-anggota');
+    Route::get('/detail-request-pinjam-anggota/{id}', [Controllers\admin\AdminController::class, 'detailRequestPinjamAnggota'])->name('detail-request-pinjam-anggota');
+
+    Route::get('/detailpengajuanpinjam/{id}', [Controllers\admin\AdminController::class, 'detailpengajuanpinjam'])->name('detailpengajuanpinjam');
+    Route::get('/edit-pengajuanpinjam/{id}', [Controllers\admin\AdminController::class, 'editpengajuanpinjam'])->name('edit-pengajuanpinjam');
+    Route::get('/update-pengajuanpinjam', [Controllers\admin\AdminController::class, 'update'])->name('update-pengajuanpinjam');
+    Route::get('/hapuspengajuanpinjam/{id}', [Controllers\admin\AdminController::class, 'deletepengajuanpinjam'])->name('hapuspengajuanpinjam');
+
+    Route::get('/detailcicilan/{id}', [Controllers\admin\AdminController::class, 'detailcicilan'])->name('detailcicilan');
+    Route::get('/editcicilan/{id}', [Controllers\admin\AdminController::class, 'editcicilan'])->name('editcicilan');
+    Route::get('/hapuscicil/{id}', [Controllers\admin\AdminController::class, 'hapuscicil'])->name('hapuscicil');
+    Route::post('/updatecicilan', [Controllers\admin\AdminController::class, 'updatecicil'])->name('updatecicilan');
+
+    // DETAIL ALL APPROVAL ON PINJAM
+    Route::get('/list-detail-approval-anggota/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalAnggota'])->name('list-detail-approval-anggota');
+    Route::get('/list-detail-approval-pendamping/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalPendamping'])->name('list-detail-approval-pendamping');
+    Route::get('/list-detail-approval-nazhir/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalNazhir'])->name('list-detail-approval-nazhir');
+    Route::get('/list-detail-approval-admin/{id}', [Controllers\admin\AdminController::class, 'listDetailApprovalAdmin'])->name('list-detail-approval-admin');
+
+    Route::get('/data-list-cicilan/{id}', [Controllers\admin\AdminController::class, 'dataListCicilan'])->name('data-list-cicilan');
 });
 
 Route::prefix('anggota')->group(function () {
@@ -222,32 +173,18 @@ Route::group([
     'middleware' => ['auth:user']
 ], function () {
     // for login
-    Route::get('/', [Controllers\DashboardController::class, 'loginUser']);
+    Route::get('/', [Controllers\anggota\DashboardController::class, 'loginUser']);
 
     // route for auth/no-auth anggota only
-    Route::get('/dashboard', [Controllers\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/statistik', [Controllers\StatistikController::class, 'index'])->name('statistik');
+    Route::get('/dashboard', [Controllers\anggota\DashboardController::class, 'index'])->name('dashboard');
 
     // DATA CHART
-    Route::get('chart-pinjaman-aktif-anda', [Controllers\DashboardController::class, 'chartPinjamanAktifAnda'])->name('chart-pinjaman-aktif-anda');
-    Route::get('chart-akumulasi-anda', [Controllers\DashboardController::class, 'chartAkumulasiAnda'])->name('chart-akumulasi-anda');
-    Route::get('chart-pengumpulan-dana-wakaf-all', [Controllers\DashboardController::class, 'chartPengumpulanDanaWakafAll'])->name('chart-pengumpulan-dana-wakaf-all');
-    Route::get('chart-peminjaman-dana-wakaf-all', [Controllers\DashboardController::class, 'chartPeminjamanDanaWakafAll'])->name('chart-peminjaman-dana-wakaf-all');
-    Route::get('chart-pinjaman-aktif-all', [Controllers\DashboardController::class, 'chartPinjamanAktifAll'])->name('chart-pinjaman-aktif-all');
-    Route::get('chart-akumulasi-all', [Controllers\DashboardController::class, 'chartAkumulasiAll'])->name('chart-akumulasi-all');
-
-    //ANGGOTA LAIN
-    Route::get('/ajuananggotalain', [Controllers\anggota\PengajuanPinjamController::class, 'lain'])->name('ajuananggotalain');
-    Route::get('/data-ajuan-anggota-lain', [Controllers\anggota\PengajuanPinjamController::class, 'dataAjuanAnggotaLain'])->name('data-ajuan-anggota-lain');
-
-    //RIWAYAT PINJAMAN
-    Route::get('/riwayatpeminjaman', [Controllers\anggota\RiwayatPeminjamanController::class, 'index'])->name('riwayatpeminjaman');
-    Route::get('/hapusriwayatpeminjaman/{id}', [Controllers\anggota\RiwayatPeminjamanController::class, 'delete'])->name('hapusriwayatpeminjaman');
-    Route::get('/indexriwayatpeminjaman', [Controllers\anggota\RiwayatPeminjamanController::class, 'input'])->name('indexriwayatpeminjaman');
-    Route::get('/detail-1/{id}', [Controllers\anggota\RiwayatPeminjamanController::class, 'detaildataajuan'])->name('detail-1');
-    Route::get('/detail-2/{id}', [Controllers\anggota\RiwayatPeminjamanController::class, 'cicilan'])->name('detail-2');
-    Route::get('/detail-3/approve', [Controllers\anggota\RiwayatPeminjamanController::class, 'approve'])->name('detail-3.approve');
-    Route::get('/totaldata', [Controllers\anggota\RiwayatPeminjamanController::class, 'totaldata'])->name('totaldata');
+    Route::get('chart-pinjaman-aktif-anda', [Controllers\anggota\DashboardController::class, 'chartPinjamanAktifAnda'])->name('chart-pinjaman-aktif-anda');
+    Route::get('chart-akumulasi-anda', [Controllers\anggota\DashboardController::class, 'chartAkumulasiAnda'])->name('chart-akumulasi-anda');
+    Route::get('chart-pengumpulan-dana-wakaf-all', [Controllers\anggota\DashboardController::class, 'chartPengumpulanDanaWakafAll'])->name('chart-pengumpulan-dana-wakaf-all');
+    Route::get('chart-peminjaman-dana-wakaf-all', [Controllers\anggota\DashboardController::class, 'chartPeminjamanDanaWakafAll'])->name('chart-peminjaman-dana-wakaf-all');
+    Route::get('chart-pinjaman-aktif-all', [Controllers\anggota\DashboardController::class, 'chartPinjamanAktifAll'])->name('chart-pinjaman-aktif-all');
+    Route::get('chart-akumulasi-all', [Controllers\anggota\DashboardController::class, 'chartAkumulasiAll'])->name('chart-akumulasi-all');
 
     Route::get('/indexdetail/{id}', [Controllers\anggota\CicilanController::class, 'index'])->name('indexdetail');
     Route::get('/editcicil/{id}', [Controllers\anggota\CicilanController::class, 'edit'])->name('editcicil');
@@ -261,15 +198,19 @@ Route::group([
     Route::get('/detail-cicilan/{id}', [Controllers\anggota\CicilanController::class, 'detailCicilan'])->name('detail-cicilan');
 
     //PENGAJUAN PINJAMAN
-    Route::get('/pengajuanpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'index'])->name('pengajuanpinjam'); //MENAMPILKAN DATA DALAM TABEL
-    Route::post('/tambahpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'store'])->name('tambahpinjam'); //SETELAH KLIK TOMBOL SUBMIT
-    Route::get('/ajuanpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'input'])->name('ajuanpinjam'); //MENGARAH KE FORM TAMBAH DATA
+    Route::get('/pinjam/my', [Controllers\anggota\PengajuanPinjamController::class, 'myPinjam'])->name('pinjam.my');
+    Route::get('/pinjam/request', [Controllers\anggota\PengajuanPinjamController::class, 'requestPinjam'])->name('pinjam.request');
+    Route::post('/tambahpinjam', [Controllers\anggota\PengajuanPinjamController::class, 'store'])->name('tambahpinjam');
     Route::get('/datapengajuanpinjam/ajuan', [Controllers\anggota\PengajuanPinjamController::class, 'dataajuan'])->name('datapengajuanpinjam.ajuan');
     Route::get('/hapusajuanpinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'delete'])->name('hapusajuanpinjam');
     Route::get('/edit-pinjaman/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'edit'])->name('edit-pinjaman');
     Route::post('/update-pinjaman', [Controllers\anggota\PengajuanPinjamController::class, 'update'])->name('update-pinjaman');
-    Route::get('/detailajuanpinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detail'])->name('detailajuanpinjam');
-    Route::get('/totalajuanpribadi', [Controllers\anggota\PengajuanPinjamController::class, 'totalajuanpribadi'])->name('totalajuanpribadi'); //SETELAH KLIK TOMBOL SUBMIT
+    Route::get('/detail-request-pinjam-extend/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detailRequestPinjamExtend'])->name('detail-request-pinjam-extend');
+    Route::get('/totalajuanpribadi', [Controllers\anggota\PengajuanPinjamController::class, 'totalajuanpribadi'])->name('totalajuanpribadi');
+
+    //ANGGOTA LAIN
+    Route::get('/pinjam/other', [Controllers\anggota\PengajuanPinjamController::class, 'requestOther'])->name('pinjam.other');
+    Route::get('/data-ajuan-anggota-lain', [Controllers\anggota\PengajuanPinjamController::class, 'dataAjuanAnggotaLain'])->name('data-ajuan-anggota-lain');
 
     // DETAIL ALL APPROVAL ON PINJAM
     Route::get('/list-detail-approval-anggota/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'listDetailApprovalAnggota'])->name('list-detail-approval-anggota');
@@ -280,6 +221,7 @@ Route::group([
     //APPROVE
     Route::get('/detailaprove/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detailaprove'])->name('detailaprove');
     Route::get('detail-request-pinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'detailRequestPinjam'])->name('detail-request-pinjam');
+    Route::get('data-pinjam-approval-by-other-anggota/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'dataPinjamApprovalByOtherAnggota'])->name('data-pinjam-approval-by-other-anggota'); 
     Route::get('/updateaprove/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'updateaprove'])->name('updateaprove');
     Route::post('/create-update-approval-pinjam', [Controllers\anggota\PengajuanPinjamController::class, 'createUpdateApprovalPinjam'])->name('create-update-approval-pinjam');
     Route::post('/delete-approval-pinjam/{id}', [Controllers\anggota\PengajuanPinjamController::class, 'deleteApprovalPinjam'])->name('delete-approval-pinjam');
@@ -297,47 +239,25 @@ Route::group([
     Route::get('check-is-step-five-complete/{id}', [Controllers\TrackingPinjamanAnggotaController::class, 'checkIsStepFiveComplete'])->name('check-is-step-five-complete');
     Route::get('check-is-step-six-complete/{id}', [Controllers\TrackingPinjamanAnggotaController::class, 'checkIsStepSixComplete'])->name('check-is-step-six-complete');
 
-    //SIMULASI PINJAM
-    Route::get('/simulasipinjam', [Controllers\anggota\SimulasiPinjamController::class, 'index'])->name('simulasipinjam');
-    Route::get('/peruntukan', [Controllers\PeruntukanController::class, 'index'])->name('peruntukan');
-    //});
-    // Website Setting
-    Route::resource('settings', Controllers\WebsiteSettingsController::class)->only([
-        'index', 'store'
-    ]);
-
-    // Datatable
-    Route::get('posts/datatable', [Controllers\PostsController::class, 'datatable'])->name('posts.datatable');
-    Route::resources([
-        'posts'             => Controllers\PostsController::class,
-        'categories'        => Controllers\PostCategoriesController::class,
-        'pages'             => Controllers\PagesController::class,
-        'advice'            => Controllers\AdviceController::class,
-        'users'             => Controllers\UserController::class,
-        'gallery'           => Controllers\GalleryController::class,
-        'slider'            => Controllers\SliderController::class,
-    ]);
-
-    // Ubah Kata Sandi Admin
-    Route::get('/users/{user}/edit-password', [Controllers\UserController::class, 'editPassword'])->name('users.editPassword');
-    Route::patch('/users/{user}/update', [Controllers\UserController::class, 'updatePassword'])->name('users.updatePassword');
-
-    // Unduh file lampiran benturan kepentingan
-    // Route::get('/file/download/{file}', [Controllers\ConflictInterestController::class, 'download'])->name('downloadFile');
-
-    //Export File
-    Route::get('/export/saran', [Controllers\AdviceController::class, 'export'])->name('export-saran');
-
-    // User Guide
-    // Route::get('/user-guide', function () {
-    //     return view('backoffice.user-guide.index');
-    // });
-
-    // //Statistik
-    // Route::get('/', [Controllers\StatistikController::class, 'index'])->name('index');
+    // UNDER DEVELOPMENT
+    Route::get('/simulation', [Controllers\anggota\SimulasiPinjamController::class, 'index'])->name('simulasipinjam');
+    Route::get('/statistik', [Controllers\anggota\StatistikController::class, 'index'])->name('statistik');
+    Route::get('/peruntukan', [Controllers\anggota\PeruntukanController::class, 'index'])->name('peruntukan');
 });
 
 
-Route::group(['prefix' => 'file-manager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
+Route::get('/backoffice', function(){
+    return response("Whooopsss!", 404);
+});
+
+Route::get('/backoffice/*', function(){
+    return response("Whooopsss!", 404);
+});
+
+Route::get('/account/password/reset', function(){
+    return response("Whooopsss!", 404);
+});
+
+Route::get('/account/password/email', function(){
+    return response("Whooopsss!", 404);
 });

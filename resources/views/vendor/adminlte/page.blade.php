@@ -42,7 +42,7 @@
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h2 class="m-0 text-dark">
-                                    @yield('title', config('adminlte.title', 'KEMENKOPUKM'))
+                                    @yield('title', config('adminlte.title', 'Jariyah-Fund'))
                                 </h2>
                             </div>
                             <div class="col-sm-6">

@@ -240,41 +240,71 @@ return [
             'url'  => 'anggota/dashboard',
         ],
         [
-            'text' => 'Peminjaman',
-            'icon' => 'fas fa-hand-holding-usd fa-fw',
-            'submenu' => [
-                [
-                    'text' => 'Riwayat Pinjam',
-                    'url' => 'anggota/pengajuanpinjam',
-                ],
-                [
-                    'text' => 'Pengajuan Pinjam',
-                    'url' => 'anggota/ajuanpinjam',
-                ],
-                [
-                    'text' => 'Pinjaman Anggota Lain',
-                    'url' => 'anggota/ajuananggotalain',
-                ],
-                [
-                    'text' => 'Simulasi Pinjam',
-                    'url' => 'anggota/simulasipinjam',
-                ],
-            ]
+            'text' => 'Pinjaman Saya',
+            'icon' => 'fas fa-wallet fa-fw',
+            'url'  => 'anggota/pinjam/my',
         ],
         [
-            'text' => 'Dana Bersama',
-            'icon' => 'fas fa-donate fa-fw',
-            'submenu' => [
-                [
-                    'text' => 'Statistik',
-                    'url' => 'anggota/statistik',
-                ],
-                [
-                    'text' => 'Peruntukan',
-                    'url' => 'anggota/peruntukan',
-                ],
-            ]
+            'text' => 'Pengajuan Pinjam',
+            'icon' => 'fas fa-hand-holding-usd fa-fw',
+            'url'  => 'anggota/pinjam/request',
         ],
+        [
+            'text' => 'Pinjaman Anggota Lain',
+            'icon' => 'fas fa-users fa-fw',
+            'url'  => 'anggota/pinjam/other',
+        ],
+        [
+            'text' => 'Simulasi Pinjam',
+            'icon' => 'fas fa-chevron-circle-right fa-fw',
+            'url'  => 'anggota/simulation',
+        ],
+        [
+            'text' => 'Statistik',
+            'icon' => 'fas fa-chart-bar fa-fw',
+            'url'  => 'anggota/statistik',
+        ],
+        [
+            'text' => 'Peruntukan',
+            'icon' => 'fas fa-donate fa-fw',
+            'url'  => 'anggota/peruntukan',
+        ],
+        // [
+        //     'text' => 'Peminjaman',
+        //     'icon' => 'fas fa-hand-holding-usd fa-fw',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Pinjaman Saya',
+        //             'url' => 'anggota/pinjam/my',
+        //         ],
+        //         [
+        //             'text' => 'Pengajuan Pinjam',
+        //             'url' => 'anggota/pinjam/request',
+        //         ],
+        //         [
+        //             'text' => 'Pinjaman Anggota Lain',
+        //             'url' => 'anggota/pinjam/other',
+        //         ],
+        //         [
+        //             'text' => 'Simulasi Pinjam',
+        //             'url' => 'anggota/simulation',
+        //         ],
+        //     ]
+        // ],
+        // [
+        //     'text' => 'Dana Bersama',
+        //     'icon' => 'fas fa-donate fa-fw',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Statistik',
+        //             'url' => 'anggota/statistik',
+        //         ],
+        //         [
+        //             'text' => 'Peruntukan',
+        //             'url' => 'anggota/peruntukan',
+        //         ],
+        //     ]
+        // ],
         // [
         //     'text' => 'Saran',
         //     'icon' => 'fas fa-fw fa-comments',
@@ -365,10 +395,10 @@ return [
         //     'icon' => 'fa fa-question-circle',
         //     'url' => 'anggota/user-guide'
         // ],
-        [
-            'text' => 'Logout',
-            'url' => 'logout',
-        ],
+        // [
+        //     'text' => 'Logout',
+        //     'url' => 'anggota/logout',
+        // ],
     ],
 
 
